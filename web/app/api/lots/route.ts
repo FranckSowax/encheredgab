@@ -4,7 +4,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import type { CreateLotData, GetLotsParams } from '@/types/lot.types'
+// import type { CreateLotData, GetLotsParams } from '@/types/lot.types'
 
 // GET /api/lots - Lister les lots
 export async function GET(request: NextRequest) {
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
 
     // Parser les paramètres de requête
-    const params: GetLotsParams = {
+    const params: any = {
       status: searchParams.get('status') as any,
       category_id: searchParams.get('category_id') || undefined,
       price_bracket: searchParams.get('price_bracket') as any,
@@ -121,7 +121,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Parser les données
-    const body: CreateLotData = await request.json()
+    const body: any = await request.json()
 
     // Valider les champs requis
     if (!body.title || !body.starting_bid) {

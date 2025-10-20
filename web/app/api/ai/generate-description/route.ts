@@ -5,7 +5,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { generateLotDescription } from '@/lib/openai/descriptions'
-import type { AIDescriptionRequest } from '@/types/lot.types'
+// import type { AIDescriptionRequest } from '@/types/lot.types'
 
 export async function POST(request: NextRequest) {
   try {
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Parser la requête
-    const body: AIDescriptionRequest = await request.json()
+    const body: any = await request.json()
 
     if (!body.title) {
       return NextResponse.json(

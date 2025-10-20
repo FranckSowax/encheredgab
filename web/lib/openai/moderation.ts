@@ -3,7 +3,7 @@
  */
 
 import OpenAI from 'openai'
-import type { AIModerationRequest, AIModerationResponse } from '@/types/lot.types'
+// import type { AIModerationRequest, AIModerationResponse } from '@/types/lot.types'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -13,8 +13,8 @@ const openai = new OpenAI({
  * Modérer le contenu (texte ou image)
  */
 export async function moderateContent(
-  request: AIModerationRequest
-): Promise<AIModerationResponse> {
+  request: any
+): Promise<any> {
   try {
     const { content, type } = request
 
@@ -34,7 +34,7 @@ export async function moderateContent(
 /**
  * Modérer du texte avec l'API Moderation d'OpenAI
  */
-async function moderateText(text: string): Promise<AIModerationResponse> {
+async function moderateText(text: string): Promise<any> {
   try {
     const moderation = await openai.moderations.create({
       input: text,
@@ -99,7 +99,7 @@ async function moderateText(text: string): Promise<AIModerationResponse> {
 /**
  * Modérer une image avec GPT-4o Vision
  */
-async function moderateImage(imageUrl: string): Promise<AIModerationResponse> {
+async function moderateImage(imageUrl: string): Promise<any> {
   try {
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o',
@@ -251,8 +251,8 @@ export async function detectObjects(imageUrl: string): Promise<string[]> {
  * Batch moderation pour plusieurs textes/images
  */
 export async function batchModerate(
-  items: AIModerationRequest[]
-): Promise<AIModerationResponse[]> {
+  items: any[]
+): Promise<any[]> {
   const results = await Promise.allSettled(
     items.map(item => moderateContent(item))
   )

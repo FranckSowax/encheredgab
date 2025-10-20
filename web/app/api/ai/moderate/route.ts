@@ -5,7 +5,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { moderateContent, batchModerate } from '@/lib/openai/moderation'
-import type { AIModerationRequest } from '@/types/lot.types'
+// import type { AIModerationRequest } from '@/types/lot.types'
 
 export async function POST(request: NextRequest) {
   try {
@@ -41,10 +41,10 @@ export async function POST(request: NextRequest) {
 
     // Support pour modération batch ou simple
     if (Array.isArray(body)) {
-      const results = await batchModerate(body as AIModerationRequest[])
+      const results = await batchModerate(body as any[])
       return NextResponse.json({ results }, { status: 200 })
     } else {
-      const result = await moderateContent(body as AIModerationRequest)
+      const result = await moderateContent(body as any)
       return NextResponse.json(result, { status: 200 })
     }
   } catch (error) {

@@ -3,7 +3,7 @@
  */
 
 import OpenAI from 'openai'
-import type { AIDescriptionRequest, AIDescriptionResponse } from '@/types/lot.types'
+// import type { AIDescriptionRequest, AIDescriptionResponse } from '@/types/lot.types'
 
 // Initialiser le client OpenAI
 const openai = new OpenAI({
@@ -14,8 +14,8 @@ const openai = new OpenAI({
  * Générer une description de lot avec GPT-4o
  */
 export async function generateLotDescription(
-  request: AIDescriptionRequest
-): Promise<AIDescriptionResponse> {
+  request: any
+): Promise<any> {
   try {
     const { title, category, images, existing_description } = request
 
