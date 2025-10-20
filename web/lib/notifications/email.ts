@@ -29,7 +29,8 @@ export async function sendEmail(options: EmailOptions) {
   return {
     success: true,
     messageId: 'stub-' + Date.now(),
-    provider: 'stub (resend disabled)'
+    provider: 'stub (resend disabled)',
+    error: undefined
   }
   
   /* Resend implementation - à activer après installation

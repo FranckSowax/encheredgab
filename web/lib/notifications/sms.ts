@@ -28,7 +28,8 @@ export async function sendSMS(options: SMSOptions) {
     success: true,
     messageId: 'stub-' + Date.now(),
     provider: 'stub (twilio disabled)',
-    status: 'sent'
+    status: 'sent',
+    error: undefined
   }
   
   /* Twilio implementation - à activer après installation

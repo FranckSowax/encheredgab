@@ -51,7 +51,7 @@ export async function sendNotification(data: SendNotificationData): Promise<Noti
     const channels = data.channels || prefs?.preferences[data.type] || ['email']
     
     // Filtrer selon les préférences globales
-    const enabledChannels = channels.filter(channel => {
+    const enabledChannels = channels.filter((channel: NotificationChannel) => {
       switch (channel) {
         case 'email': return prefs?.email_enabled !== false
         case 'sms': return prefs?.sms_enabled !== false && user.phone
