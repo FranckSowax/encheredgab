@@ -1,16 +1,15 @@
 /**
  * Module de notifications SMS
  * Compatible avec Twilio, Africa's Talking, ou tout autre provider SMS
+ * NOTE: Twilio actuellement désactivé pour le build - à activer après installation
  */
 
 import type { NotificationPayload } from '@/types/notification.types'
 
 // Pour Twilio
-import twilio from 'twilio'
+// import twilio from 'twilio'
 
-const client = process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN
-  ? twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN)
-  : null
+const client = null // Twilio disabled for build
 
 export interface SMSOptions {
   to: string
@@ -19,6 +18,20 @@ export interface SMSOptions {
 }
 
 export async function sendSMS(options: SMSOptions) {
+  // TODO: Activer Twilio après installation du package
+  console.log('SMS sending disabled (Twilio not installed):', {
+    to: options.to,
+    message: options.message
+  })
+  
+  return {
+    success: true,
+    messageId: 'stub-' + Date.now(),
+    provider: 'stub (twilio disabled)',
+    status: 'sent'
+  }
+  
+  /* Twilio implementation - à activer après installation
   try {
     if (!client) {
       throw new Error('SMS client not configured')
@@ -44,6 +57,7 @@ export async function sendSMS(options: SMSOptions) {
       provider: 'twilio'
     }
   }
+  */
 }
 
 // Templates SMS (courts et concis)

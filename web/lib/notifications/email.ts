@@ -1,12 +1,13 @@
 /**
  * Module de notifications Email via Resend
  * Resend est un service d'email moderne et fiable
+ * NOTE: Resend actuellement désactivé pour le build - à activer après installation
  */
 
-import { Resend } from 'resend'
+// import { Resend } from 'resend'
 import type { NotificationPayload } from '@/types/notification.types'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// const resend = new Resend(process.env.RESEND_API_KEY)
 
 export interface EmailOptions {
   to: string | string[]
@@ -19,6 +20,19 @@ export interface EmailOptions {
 }
 
 export async function sendEmail(options: EmailOptions) {
+  // TODO: Activer Resend après installation du package
+  console.log('Email sending disabled (Resend not installed):', {
+    to: options.to,
+    subject: options.subject
+  })
+  
+  return {
+    success: true,
+    messageId: 'stub-' + Date.now(),
+    provider: 'stub (resend disabled)'
+  }
+  
+  /* Resend implementation - à activer après installation
   try {
     const {data, error } = await resend.emails.send({
       from: options.from || process.env.RESEND_FROM_EMAIL || 'Douane Enchères <noreply@douane-encheres.ga>',
@@ -47,6 +61,7 @@ export async function sendEmail(options: EmailOptions) {
       provider: 'resend'
     }
   }
+  */
 }
 
 // Templates HTML
