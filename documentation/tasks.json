@@ -1,0 +1,344 @@
+[
+  {
+    "id": 1,
+    "title": "Core Infrastructure and Authentication Setup",
+    "status": "pending",
+    "details": "Initialize Next.js 14 project with TypeScript and Tailwind CSS, configure Supabase Auth, Database, and Storage. Implement user registration flow with email/phone verification, password creation, and ID document upload for KYC. Set up React Native project structure with shared component library. Create database schema for users, roles, and KYC documents. Implement role-based access control (bidder, photo team, admin, customs). Configure PWA service workers for offline support. Set up development environment with VS Code, Cursor AI plugin, and Windsurf for Supabase queries.",
+    "priority": "high",
+    "subtasks": [
+      {
+        "id": 1,
+        "title": "Initialize Project Structure and Development Environment",
+        "status": "pending",
+        "details": "Create Next.js 14 project with TypeScript and Tailwind CSS. Initialize React Native project structure. Set up shared component library architecture. Configure VS Code workspace with Cursor AI plugin and Windsurf extension. Set up package.json scripts, ESLint, Prettier, and TypeScript configurations. Create folder structure for components, pages, utils, and shared libraries.",
+        "description": "Set up the foundational project structure for both web and mobile applications with proper development tooling and configuration.",
+        "dependencies": [],
+        "testStrategy": "Verify project builds successfully, linting passes, and development servers start without errors"
+      },
+      {
+        "id": 2,
+        "title": "Configure Supabase Backend Services",
+        "status": "pending",
+        "details": "Create Supabase project and configure environment variables. Set up Supabase Auth with email and phone providers. Configure Supabase Storage buckets for KYC documents with proper security policies. Install and configure Supabase client libraries for both Next.js and React Native. Set up database connection and test basic CRUD operations.",
+        "description": "Set up and configure Supabase instance with authentication, database, and storage services for the application.",
+        "dependencies": [
+          1
+        ],
+        "testStrategy": "Integration tests for Supabase connection, verify auth providers work, test file upload to storage buckets"
+      },
+      {
+        "id": 3,
+        "title": "Design and Implement Database Schema",
+        "status": "pending",
+        "details": "Design and create database tables for users, user_roles, kyc_documents, and role_permissions. Implement Row Level Security (RLS) policies for each table. Create database functions for role checking and permission validation. Set up proper indexes for performance. Create database migrations and seed data for development. Implement role-based access control with bidder, photo team, admin, and customs roles.",
+        "description": "Create comprehensive database schema for users, roles, KYC documents, and implement role-based access control system.",
+        "dependencies": [
+          2
+        ],
+        "testStrategy": "Unit tests for database functions, verify RLS policies work correctly, test role-based access scenarios"
+      },
+      {
+        "id": 4,
+        "title": "Implement User Authentication and Registration Flow",
+        "status": "pending",
+        "details": "Create registration forms with email/phone input and validation. Implement Supabase Auth integration for sign-up and sign-in flows. Build email and SMS verification components. Create password creation and reset functionality. Implement session management and protected route components. Build user profile management interface. Add proper error handling and loading states for all auth flows.",
+        "description": "Build complete user authentication system with registration, login, and email/phone verification capabilities.",
+        "dependencies": [
+          3
+        ],
+        "testStrategy": "Unit tests for authentication components, integration tests for complete auth flows, manual testing of email/SMS verification"
+      },
+      {
+        "id": 5,
+        "title": "Implement KYC System and PWA Configuration",
+        "status": "pending",
+        "details": "Create KYC document upload interface with drag-and-drop functionality. Implement file validation (size, type, format). Build document preview and management components. Create KYC status tracking and admin verification interface. Configure PWA manifest and service workers for offline support. Implement offline data synchronization strategies. Add push notification capabilities. Create app installation prompts and offline indicators.",
+        "description": "Build KYC document upload and verification system, and configure Progressive Web App functionality with offline support.",
+        "dependencies": [
+          4
+        ],
+        "testStrategy": "Manual testing of KYC upload and verification process, PWA functionality testing on mobile devices, offline mode testing, file upload validation tests"
+      }
+    ],
+    "description": "Set up the foundational infrastructure including Supabase backend, authentication system with KYC verification, and basic project structure for both web and mobile applications.",
+    "dependencies": [],
+    "testStrategy": "Unit tests for authentication flows, integration tests for Supabase connection, manual testing of KYC upload and verification process, PWA functionality testing on mobile devices"
+  },
+  {
+    "id": 2,
+    "title": "Lot Management and AI Integration",
+    "status": "pending",
+    "details": "Create lot management interface for photo teams to upload multiple images, set categories, starting bids, and reserve prices. Integrate GPT-4o API for automatic description generation and content moderation. Implement image storage and optimization using Supabase Storage. Create admin dashboard sections for lot approval and management. Build catalog browsing interface with filtering by price brackets and categories. Implement automatic relisting functionality for unpaid lots with 'relisted' badge. Set up weekly cycle management (Mon 08:00-Wed 18:00 for listing). Create lot detail views with photo carousels and AI-generated descriptions.",
+    "priority": "high",
+    "subtasks": [
+      {
+        "id": 1,
+        "title": "Implement Core Lot Management Database Schema and CRUD Operations",
+        "status": "pending",
+        "details": "Design database tables for lots (id, title, category, starting_bid, reserve_price, status, created_at, etc.), lot_images (id, lot_id, image_url, is_primary), and categories (id, name, description). Create API endpoints for lot CRUD operations with input validation, authentication middleware for photo teams, and proper error responses. Implement database migrations and seed data for categories.",
+        "description": "Create the foundational database schema for lot management including tables for lots, images, categories, and bidding information. Implement basic CRUD operations for lot creation, reading, updating, and deletion with proper validation and error handling.",
+        "dependencies": [],
+        "testStrategy": "Unit tests for all CRUD operations, database constraint testing, API endpoint testing with various input scenarios"
+      },
+      {
+        "id": 2,
+        "title": "Build Image Upload and Storage System with Supabase Integration",
+        "status": "pending",
+        "details": "Set up Supabase Storage buckets with proper security policies. Create image upload API endpoints with file validation (size, format, dimensions). Implement automatic image optimization and thumbnail generation. Build image management interface for photo teams to upload, reorder, and delete images. Add image URL generation and CDN integration for optimized delivery.",
+        "description": "Implement secure image upload functionality with automatic optimization and storage using Supabase Storage. Include support for multiple image uploads per lot with primary image designation and image validation.",
+        "dependencies": [
+          1
+        ],
+        "testStrategy": "Integration tests for Supabase Storage, image upload validation testing, performance testing for large image uploads"
+      },
+      {
+        "id": 3,
+        "title": "Integrate GPT-4o API for AI-Powered Description Generation and Content Moderation",
+        "status": "pending",
+        "details": "Set up GPT-4o API client with proper authentication and rate limiting. Create prompt engineering for generating auction lot descriptions based on images and category context. Implement content moderation pipeline to check for inappropriate content, spam, or policy violations. Add manual override functionality for photo teams to edit AI-generated descriptions. Include retry logic and fallback mechanisms for API failures.",
+        "description": "Implement AI integration using GPT-4o API to automatically generate lot descriptions based on uploaded images and basic lot information. Include content moderation to ensure appropriate descriptions and flag potentially problematic content.",
+        "dependencies": [
+          1,
+          2
+        ],
+        "testStrategy": "Integration tests for GPT-4o API calls, content moderation accuracy testing, API rate limiting and error handling tests"
+      },
+      {
+        "id": 4,
+        "title": "Create Photo Team Management Interface and Admin Dashboard",
+        "status": "pending",
+        "details": "Create photo team dashboard with lot creation forms, image upload interface, and lot status tracking. Build admin approval interface with bulk actions, lot preview, and approval workflow. Implement weekly cycle management (Monday 08:00 - Wednesday 18:00) with automatic status updates and notifications. Add user role management and permissions system. Create reporting and analytics views for lot performance and team productivity.",
+        "description": "Build comprehensive user interfaces for photo teams to manage lots and for administrators to approve and oversee the lot management process. Include workflow management for the weekly auction cycle.",
+        "dependencies": [
+          1,
+          2,
+          3
+        ],
+        "testStrategy": "Manual testing of photo team workflow, admin approval process testing, weekly cycle automation testing"
+      },
+      {
+        "id": 5,
+        "title": "Implement Catalog Browsing, Lot Details, and Automatic Relisting System",
+        "status": "pending",
+        "details": "Create catalog browsing interface with filtering by price brackets, categories, and search functionality. Build lot detail pages with photo carousels, AI-generated descriptions, and bidding information. Implement automatic relisting logic for unpaid lots with 'relisted' badge system. Add pagination, sorting options, and responsive design for mobile devices. Include social sharing functionality and lot watchlist features.",
+        "description": "Build the public-facing catalog interface with advanced filtering and search capabilities, detailed lot view pages, and implement automatic relisting functionality for unpaid lots with proper badge management.",
+        "dependencies": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "testStrategy": "Automated tests for relisting logic, manual testing of catalog browsing and filtering, responsive design testing across devices"
+      }
+    ],
+    "description": "Implement the lot management system for photo teams to upload and manage auction items, including AI-powered description generation and content moderation.",
+    "dependencies": [
+      1
+    ],
+    "testStrategy": "Unit tests for lot CRUD operations, integration tests for GPT-4o API, image upload and storage testing, automated tests for relisting logic, manual testing of photo team workflow"
+  },
+  {
+    "id": 3,
+    "title": "Real-Time Auction Engine",
+    "status": "pending",
+    "details": "Implement Supabase Realtime integration for sub-200ms bid updates. Create live auction interface with countdown timer, real-time bid display, and quick-access bid buttons. Build bid validation system with increment rules and concurrency control using optimistic locking. Implement offline bid queuing for network instability scenarios. Create auction state management for Thursday 08:00-20:00 bidding window. Build segmented auction views for different price brackets (< 50k, 50k-200k, 200k-1M FCFA). Implement server-side bid validation and race condition mitigation. Add auto-scaling configuration for Supabase Realtime listeners to handle 500+ concurrent users.",
+    "priority": "high",
+    "subtasks": [
+      {
+        "id": 1,
+        "title": "Supabase Realtime Integration and Configuration",
+        "status": "pending",
+        "details": "Configure Supabase Realtime channels for auction events, set up connection pooling, implement auto-scaling policies for concurrent listeners, optimize database triggers for real-time updates, configure rate limiting and connection management for high-throughput scenarios",
+        "description": "Set up Supabase Realtime infrastructure with optimized configuration for sub-200ms bid updates and auto-scaling for 500+ concurrent users",
+        "dependencies": [],
+        "testStrategy": "Connection stress testing with 500+ concurrent users, latency measurement for real-time updates, auto-scaling validation under load"
+      },
+      {
+        "id": 2,
+        "title": "Live Auction Interface with Real-Time Updates",
+        "status": "pending",
+        "details": "Create React components for auction display, implement WebSocket connection management, build countdown timer with millisecond precision, design quick-bid buttons for common increment amounts, implement real-time bid feed with smooth animations, add segmented views for different price brackets (< 50k, 50k-200k, 200k-1M FCFA)",
+        "description": "Build the frontend auction interface with live countdown timers, real-time bid display, and quick-access bidding controls",
+        "dependencies": [
+          1
+        ],
+        "testStrategy": "UI responsiveness testing, real-time synchronization validation, countdown timer accuracy testing across different devices"
+      },
+      {
+        "id": 3,
+        "title": "Bid Validation System with Increment Rules",
+        "status": "pending",
+        "details": "Create server-side validation functions for bid amounts, implement minimum increment rules based on current bid levels, add user authentication and eligibility validation, build bid amount formatting and currency handling, implement business rule validation for auction timing and user limits",
+        "description": "Implement comprehensive bid validation logic with increment rules, minimum bid requirements, and user eligibility checks",
+        "dependencies": [
+          1
+        ],
+        "testStrategy": "Validation rule testing with edge cases, business logic verification, invalid bid rejection testing"
+      },
+      {
+        "id": 4,
+        "title": "Concurrency Control and Race Condition Mitigation",
+        "status": "pending",
+        "details": "Implement optimistic locking using database versioning, create conflict resolution algorithms for simultaneous bids, build retry mechanisms with exponential backoff, implement server-side bid queuing and processing, add transaction isolation for bid processing, create bid conflict notification system",
+        "description": "Implement optimistic locking and race condition handling for simultaneous bid submissions with server-side conflict resolution",
+        "dependencies": [
+          3
+        ],
+        "testStrategy": "Race condition testing with simultaneous bid submissions, concurrency stress testing, optimistic locking validation"
+      },
+      {
+        "id": 5,
+        "title": "Auction State Management and Offline Functionality",
+        "status": "pending",
+        "details": "Implement auction lifecycle management (pre-auction, active, closed states), create offline bid queuing with local storage, build network connectivity detection and reconnection logic, implement bid synchronization when connection is restored, add auction schedule management for weekly bidding windows, create state persistence and recovery mechanisms",
+        "description": "Build comprehensive auction state management for Thursday 08:00-20:00 bidding windows with offline bid queuing capabilities",
+        "dependencies": [
+          2,
+          4
+        ],
+        "testStrategy": "Offline functionality testing with network interruptions, state synchronization validation, auction schedule compliance testing"
+      }
+    ],
+    "description": "Build the core real-time bidding system using Supabase Realtime with live countdown timers, bid validation, and concurrency control.",
+    "dependencies": [
+      1,
+      2
+    ],
+    "testStrategy": "Load testing with 500+ concurrent users, latency testing for bid updates, race condition testing with simultaneous bids, offline functionality testing, real-time synchronization validation"
+  },
+  {
+    "id": 4,
+    "title": "Payment System and User Wallet",
+    "status": "pending",
+    "details": "Integrate third-party payment provider APIs for Airtel Money and Moov Money with sandbox testing. Implement user wallet (cagnotte) system with deposit, fund blocking, and refund capabilities. Create payment processing workflow for Friday 08:00-15:00 window with automatic exclusion for missed payments. Build admin interface for recording cash payments. Implement 48-hour refund system for unused wallet balance with withdrawal restrictions. Create payment retry logic and error handling. Build transaction history tracking and audit logs. Implement fund blocking mechanism for premium auctions (≥1M FCFA). Set up webhook handling for payment status updates.",
+    "priority": "medium",
+    "subtasks": [
+      {
+        "id": 1,
+        "title": "Integrate Third-Party Payment Provider APIs",
+        "status": "pending",
+        "details": "Set up API credentials and authentication for both Airtel Money and Moov Money providers. Implement payment initiation, status checking, and webhook endpoints. Create configuration management for switching between sandbox and production environments. Build error handling for API failures and timeouts. Implement secure credential storage and API rate limiting.",
+        "description": "Implement integration with Airtel Money and Moov Money payment APIs, including sandbox environment setup, authentication, and basic payment processing capabilities.",
+        "dependencies": [],
+        "testStrategy": "Integration tests with payment provider sandbox environments, API response validation, error scenario testing"
+      },
+      {
+        "id": 2,
+        "title": "Build User Wallet (Cagnotte) System",
+        "status": "pending",
+        "details": "Create wallet database schema with balance tracking, transaction history, and blocked funds. Implement deposit methods linking to payment providers. Build fund blocking mechanism for premium auctions (≥1M FCFA) with automatic release logic. Create balance inquiry and transaction history endpoints. Implement concurrent transaction handling with proper locking mechanisms.",
+        "description": "Implement the core wallet system with deposit functionality, balance management, fund blocking capabilities, and transaction tracking for user accounts.",
+        "dependencies": [
+          1
+        ],
+        "testStrategy": "Unit tests for wallet operations, concurrent transaction testing, balance accuracy validation"
+      },
+      {
+        "id": 3,
+        "title": "Implement Payment Processing Workflow",
+        "status": "pending",
+        "details": "Build scheduled payment processor that runs during Friday 08:00-15:00 window. Implement automatic exclusion system for users who miss payments. Create payment retry logic with exponential backoff for failed transactions. Build comprehensive error handling and logging for payment failures. Implement payment status tracking and user notifications.",
+        "description": "Create the Friday 08:00-15:00 payment processing window with automatic exclusion logic, payment retry mechanisms, and comprehensive error handling.",
+        "dependencies": [
+          2
+        ],
+        "testStrategy": "Payment window timing tests, retry logic validation, failure scenario testing, exclusion mechanism verification"
+      },
+      {
+        "id": 4,
+        "title": "Build Admin Interface and Cash Payment Management",
+        "status": "pending",
+        "details": "Create admin web interface for cash payment recording with receipt generation. Build wallet management tools for admins to view balances, block/unblock funds, and process manual refunds. Implement transaction search and filtering capabilities. Create audit trail for all admin actions. Build reporting dashboard for payment analytics and reconciliation.",
+        "description": "Develop admin dashboard for recording cash payments, managing user wallets, viewing transaction history, and handling manual payment operations.",
+        "dependencies": [
+          3
+        ],
+        "testStrategy": "Admin interface functionality testing, cash payment recording validation, audit trail verification"
+      },
+      {
+        "id": 5,
+        "title": "Implement Refund System and Webhook Management",
+        "status": "pending",
+        "details": "Create automated refund processor that runs every 48 hours to identify and process unused wallet balances. Implement withdrawal restriction logic and user notification system. Build webhook endpoint handlers for payment status updates from providers. Create webhook retry and failure handling mechanisms. Implement comprehensive transaction audit logs and reconciliation tools.",
+        "description": "Build the 48-hour automatic refund system for unused wallet balance, implement withdrawal restrictions, and create robust webhook handling for payment status updates.",
+        "dependencies": [
+          4
+        ],
+        "testStrategy": "Refund automation testing, webhook reliability testing, withdrawal restriction validation, audit log verification"
+      }
+    ],
+    "description": "Integrate payment processing for Airtel Money and Moov Money, implement the user wallet (cagnotte) system, and build payment management workflows.",
+    "dependencies": [
+      1,
+      3
+    ],
+    "testStrategy": "Integration tests with payment provider sandbox, wallet transaction testing, payment failure scenario testing, refund process validation, webhook reliability testing"
+  },
+  {
+    "id": 5,
+    "title": "Notifications, Delivery, and Admin Dashboard",
+    "status": "pending",
+    "details": "Build multi-channel notification system using SMS (Twilio), email (SendGrid/Mailgun), push notifications, and WhatsApp API. Implement delivery management with flat-rate zone pricing and free depot pickup options. Create QR code generation system for order confirmation and WhatsApp integration for delivery updates. Build comprehensive admin dashboard with user management, KYC approval workflow, lot management, payment tracking, and exclusion management. Implement audit logging for all admin actions. Create notification templates and scheduling for phase transitions, bid status, payments, and delivery updates. Set up rate limiting and batch processing for notifications. Build reporting interface for customs officers and admin team.",
+    "priority": "medium",
+    "subtasks": [
+      {
+        "id": 1,
+        "title": "Multi-Channel Notification System Implementation",
+        "status": "pending",
+        "details": "Implement notification service with provider abstractions for SMS, email, push, and WhatsApp. Create notification templates for phase transitions, bid status, payments, and delivery updates. Implement rate limiting and batch processing to prevent spam and manage API quotas. Set up notification scheduling system for delayed/recurring notifications. Create fallback mechanisms between channels and delivery status tracking.",
+        "description": "Build comprehensive notification system supporting SMS (Twilio), email (SendGrid/Mailgun), push notifications, and WhatsApp API with template management and rate limiting",
+        "dependencies": [],
+        "testStrategy": "Test notification delivery across all channels, verify rate limiting works correctly, validate template rendering, test batch processing performance"
+      },
+      {
+        "id": 2,
+        "title": "QR Code Generation and Delivery Management System",
+        "status": "pending",
+        "details": "Create QR code generation service for unique order identifiers. Implement delivery management with flat-rate zone pricing calculator and free depot pickup scheduling. Build QR code scanning validation for pickup/delivery confirmation. Integrate with notification system for delivery status updates via WhatsApp and other channels. Create delivery tracking interface for customers and delivery personnel.",
+        "description": "Implement QR code generation for order confirmation, delivery tracking, and pickup verification with zone-based pricing and depot pickup options",
+        "dependencies": [
+          1
+        ],
+        "testStrategy": "Validate QR code generation uniqueness and scanning accuracy, test zone pricing calculations, verify pickup/delivery workflow end-to-end"
+      },
+      {
+        "id": 3,
+        "title": "Admin Dashboard Core Infrastructure",
+        "status": "pending",
+        "details": "Create admin dashboard frontend with secure authentication and role-based permissions. Implement main navigation structure for user management, KYC workflows, lot management, payment tracking, and exclusion management. Set up admin session management and security middleware. Create responsive dashboard layout with sidebar navigation and breadcrumb system. Implement audit logging infrastructure for all admin actions.",
+        "description": "Build foundational admin dashboard with authentication, role-based access control, and main navigation structure for platform management",
+        "dependencies": [],
+        "testStrategy": "Test admin authentication and authorization, verify role-based access restrictions, validate audit logging captures all actions"
+      },
+      {
+        "id": 4,
+        "title": "User Management and KYC Workflow Implementation",
+        "status": "pending",
+        "details": "Build user management interface with search, filtering, and bulk operations. Implement KYC approval workflow with document upload, verification steps, and approval/rejection actions. Create user profile management with status updates and communication history. Implement exclusion management for banned/restricted users. Add user activity tracking and account management tools for admins.",
+        "description": "Implement comprehensive user management system with KYC approval workflow, document verification, and user status management within admin dashboard",
+        "dependencies": [
+          3
+        ],
+        "testStrategy": "Test KYC approval workflow end-to-end, verify document upload and verification process, validate user status management and exclusion functionality"
+      },
+      {
+        "id": 5,
+        "title": "Lot Management, Payment Tracking, and Reporting Interface",
+        "status": "pending",
+        "details": "Implement lot management interface with lot creation, editing, status tracking, and bulk operations. Build payment tracking system with transaction history, refund management, and payment status monitoring. Create comprehensive reporting interface with customizable filters, export functionality, and dashboard widgets. Implement customs officer reporting tools with lot status summaries and compliance tracking. Add data visualization components for key metrics and trends.",
+        "description": "Complete admin dashboard with lot management tools, payment tracking system, and comprehensive reporting interface for customs officers and admin team",
+        "dependencies": [
+          3,
+          4
+        ],
+        "testStrategy": "Test lot management operations and bulk actions, verify payment tracking accuracy, validate reporting data integrity and export functionality"
+      }
+    ],
+    "description": "Implement multi-channel notification system, delivery/pickup management with QR codes, and comprehensive admin dashboard for platform management.",
+    "dependencies": [
+      1,
+      4
+    ],
+    "testStrategy": "Notification delivery testing across all channels, QR code generation and scanning validation, admin workflow testing, rate limiting verification, WhatsApp API integration testing, delivery process end-to-end testing"
+  }
+]
