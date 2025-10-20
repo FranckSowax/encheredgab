@@ -92,14 +92,16 @@ export default function ProfilePage() {
     }
 
     // Mettre à jour le profil dans Supabase
+    const updateData = {
+      full_name: data.full_name as string | null,
+      phone: data.phone as string | null,
+      address: data.address as string | null,
+      updated_at: new Date().toISOString()
+    }
+
     const { error } = await supabase
       .from('users')
-      .update({
-        full_name: data.full_name,
-        phone: data.phone,
-        address: data.address,
-        updated_at: new Date().toISOString()
-      })
+      .update(updateData)
       .eq('id', authUser.id)
 
     if (error) {
