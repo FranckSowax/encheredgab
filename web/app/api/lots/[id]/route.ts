@@ -4,16 +4,16 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import type { UpdateLotData } from '@/types/lot.types'
+// import type { UpdateLotData } from '@/types/lot.types'
 
 // GET /api/lots/[id] - Obtenir un lot spécifique
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const supabase = await createClient()
-    const { id } = params
+    const { id } = await params
 
     const { data: lot, error } = await supabase
       .from('lots')
@@ -56,11 +56,11 @@ export async function GET(
 // PATCH /api/lots/[id] - Mettre à jour un lot
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const supabase = await createClient()
-    const { id } = params
+    const { id } = await params
 
     // Vérifier l'authentification
     const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -103,8 +103,8 @@ export async function PATCH(
       )
     }
 
-    // Parser les données de mise à jour
-    const body: UpdateLotData = await request.json()
+    // Parser les données
+    const body: any = await request.json()
 
     // Empêcher la modification de certains champs selon le rôle
     if (!isAdmin && body.status && body.status !== 'draft') {
@@ -133,7 +133,7 @@ export async function PATCH(
         changed_by: user.id,
         field_name: key,
         old_value: String(existingLot[key as keyof typeof existingLot]),
-        new_value: String(body[key as keyof UpdateLotData])
+        new_value: String(body[key])
       }))
 
       await supabase.from('lot_history').insert(changes)
@@ -152,11 +152,11 @@ export async function PATCH(
 // DELETE /api/lots/[id] - Supprimer un lot
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const supabase = await createClient()
-    const { id } = params
+    const { id } = await params
 
     // Vérifier l'authentification
     const { data: { user }, error: authError } = await supabase.auth.getUser()

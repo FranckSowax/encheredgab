@@ -9,11 +9,11 @@ import type { PlaceBidData } from '@/types/auction.types'
 // GET /api/auctions/[id]/bids - Obtenir l'historique des enchères
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const supabase = await createClient()
-    const { id: auctionId } = params
+    const { id: auctionId } = await params
     const { searchParams } = new URL(request.url)
     
     const limit = parseInt(searchParams.get('limit') || '50')
@@ -44,11 +44,11 @@ export async function GET(
 // POST /api/auctions/[id]/bids - Placer une enchère
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const supabase = await createClient()
-    const { id: auctionId } = params
+    const { id: auctionId } = await params
 
     // Vérifier l'authentification
     const { data: { user }, error: authError } = await supabase.auth.getUser()

@@ -7,11 +7,11 @@ import { createClient } from '@/lib/supabase/server'
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const supabase = await createClient()
-    const { id } = params
+    const { id: notificationId } = await params
 
     // Authentification
     const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -21,7 +21,7 @@ export async function POST(
 
     // Appeler la fonction SQL
     const { data, error } = await supabase.rpc('mark_notification_read', {
-      p_notification_id: id
+      p_notification_id: notificationId
     })
 
     if (error) throw error

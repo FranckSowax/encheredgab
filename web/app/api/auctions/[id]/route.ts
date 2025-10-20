@@ -8,11 +8,11 @@ import { createClient } from '@/lib/supabase/server'
 // GET /api/auctions/[id] - Obtenir les détails d'une enchère
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const supabase = await createClient()
-    const { id } = params
+    const { id } = await params
 
     const { data: auction, error } = await supabase
       .from('auctions')
@@ -78,11 +78,11 @@ export async function GET(
 // PATCH /api/auctions/[id] - Mettre à jour une enchère (admin uniquement)
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const supabase = await createClient()
-    const { id } = params
+    const { id } = await params
 
     // Vérifier l'authentification
     const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -149,11 +149,11 @@ export async function PATCH(
 // DELETE /api/auctions/[id] - Annuler une enchère (admin uniquement)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const supabase = await createClient()
-    const { id } = params
+    const { id } = await params
 
     // Vérifier l'authentification
     const { data: { user }, error: authError } = await supabase.auth.getUser()

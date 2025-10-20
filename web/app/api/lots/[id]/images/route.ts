@@ -9,11 +9,11 @@ import { moderateContent } from '@/lib/openai/moderation'
 // POST /api/lots/[id]/images - Upload d'images pour un lot
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const supabase = await createClient()
-    const { id: lotId } = params
+    const { id: lotId } = await params
 
     // Vérifier l'authentification
     const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -176,11 +176,11 @@ export async function POST(
 // GET /api/lots/[id]/images - Lister les images d'un lot
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const supabase = await createClient()
-    const { id: lotId } = params
+    const { id: lotId } = await params
 
     const { data: images, error } = await supabase
       .from('lot_images')
