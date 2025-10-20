@@ -4,7 +4,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import type { CreateAuctionData, GetAuctionsParams } from '@/types/auction.types'
+// import type { CreateAuctionData, GetAuctionsParams } from '@/types/auction.types'
 
 // GET /api/auctions - Lister les enchères
 export async function GET(request: NextRequest) {
@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const supabase = await createClient()
     const { searchParams } = new URL(request.url)
 
-    const params: GetAuctionsParams = {
+    const params: any = {
       status: searchParams.get('status') as any,
       lot_id: searchParams.get('lot_id') || undefined,
       active_only: searchParams.get('active_only') === 'true',
@@ -123,7 +123,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Parser les données
-    const body: CreateAuctionData = await request.json()
+    const body: any = await request.json()
 
     // Validation
     if (!body.lot_id || !body.start_date || !body.end_date || !body.starting_price) {
