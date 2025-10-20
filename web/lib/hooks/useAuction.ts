@@ -11,10 +11,32 @@ import type {
   AuctionWithDetails, 
   Bid, 
   PlaceBidResult,
-  TimeRemaining,
-  calculateTimeRemaining 
+  TimeRemaining
 } from '@/types/auction.types'
+// import { calculateTimeRemaining } from '@/types/auction.types'
 import { RealtimeChannel } from '@supabase/supabase-js'
+
+// Helper function pour calculer le temps restant
+function calculateTimeRemaining(endDate: string): TimeRemaining | null {
+  const now = new Date()
+  const end = new Date(endDate)
+  const diff = end.getTime() - now.getTime()
+  const total_seconds = Math.floor(diff / 1000)
+
+  if (diff <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0, total_seconds: 0, is_ending_soon: false, is_critical: false }
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000)
+
+  const is_critical = total_seconds < 300 // moins de 5 minutes
+  const is_ending_soon = total_seconds < 3600 // moins de 1 heure
+
+  return { days, hours, minutes, seconds, total_seconds, is_ending_soon, is_critical }
+}
 
 export function useAuction(auctionId: string | null) {
   const [auction, setAuction] = useState<AuctionWithDetails | null>(null)
@@ -164,7 +186,7 @@ export function useAuction(auctionId: string | null) {
       setTimeRemaining(remaining)
 
       // Arrêter le timer si enchère terminée
-      if (remaining.total_seconds === 0) {
+      if (remaining && remaining.total_seconds === 0) {
         fetchAuction() // Rafraîchir pour obtenir le statut final
       }
     }
