@@ -54,14 +54,14 @@ export default function AuctionDetailPage({ params }: { params: Promise<{ id: st
   return (
     <div className="auction-detail-page">
       <div className="container">
-        <div className="detail-grid">
-          {/* Left: Image Gallery */}
-          <div className="gallery-section">
+        <div className="detail-grid-3col">
+          {/* Column 1: Image Gallery */}
+          <div className="gallery-column">
             <ImageGallery images={images} title={auction.lot?.title} />
           </div>
 
-          {/* Right: Details */}
-          <div className="details-section">
+          {/* Column 2: Title + Description */}
+          <div className="info-column">
             {/* Title & Meta */}
             <div className="title-section">
               <div className="title-header">
@@ -82,6 +82,41 @@ export default function AuctionDetailPage({ params }: { params: Promise<{ id: st
               </div>
             </div>
 
+            {/* Description */}
+            <div className="description-section">
+              <h3 className="section-title">Description</h3>
+              <p className="description-text">
+                {auction.lot?.description || 'Aucune description disponible.'}
+              </p>
+            </div>
+
+            {/* Details Table */}
+            <div className="details-table">
+              <h3 className="section-title">Informations</h3>
+              <div className="details-grid-items">
+                <div className="detail-row">
+                  <span className="detail-label">État</span>
+                  <span className="detail-value">{auction.lot?.condition_description || 'Non spécifié'}</span>
+                </div>
+                <div className="detail-row">
+                  <span className="detail-label">Poids estimé</span>
+                  <span className="detail-value">{auction.lot?.estimated_weight_kg ? `${auction.lot.estimated_weight_kg} kg` : 'Non spécifié'}</span>
+                </div>
+                <div className="detail-row">
+                  <span className="detail-label">Date de début</span>
+                  <span className="detail-value">{new Date(auction.start_date).toLocaleDateString('fr-FR')}</span>
+                </div>
+                <div className="detail-row">
+                  <span className="detail-label">Date de fin</span>
+                  <span className="detail-value">{new Date(auction.end_date).toLocaleDateString('fr-FR')}</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Column 3: Bidding Module */}
+          <div className="bidding-column">
             {/* Price Section */}
             <div className="price-section">
               <div className="price-group">
@@ -126,37 +161,6 @@ export default function AuctionDetailPage({ params }: { params: Promise<{ id: st
                 🔥 {auction.total_bids} enchère{auction.total_bids > 1 ? 's' : ''} déjà placée{auction.total_bids > 1 ? 's' : ''}
               </div>
             )}
-
-            {/* Description */}
-            <div className="description-section">
-              <h3 className="section-title">Description</h3>
-              <p className="description-text">
-                {auction.lot?.description || 'Aucune description disponible.'}
-              </p>
-            </div>
-
-            {/* Details Table */}
-            <div className="details-table">
-              <h3 className="section-title">Informations</h3>
-              <div className="details-grid-items">
-                <div className="detail-row">
-                  <span className="detail-label">État</span>
-                  <span className="detail-value">{auction.lot?.condition_description || 'Non spécifié'}</span>
-                </div>
-                <div className="detail-row">
-                  <span className="detail-label">Poids estimé</span>
-                  <span className="detail-value">{auction.lot?.estimated_weight_kg ? `${auction.lot.estimated_weight_kg} kg` : 'Non spécifié'}</span>
-                </div>
-                <div className="detail-row">
-                  <span className="detail-label">Date de début</span>
-                  <span className="detail-value">{new Date(auction.start_date).toLocaleDateString('fr-FR')}</span>
-                </div>
-                <div className="detail-row">
-                  <span className="detail-label">Date de fin</span>
-                  <span className="detail-value">{new Date(auction.end_date).toLocaleDateString('fr-FR')}</span>
-                </div>
-              </div>
-            </div>
 
             {/* Support Section */}
             <div className="support-section">
@@ -213,24 +217,52 @@ export default function AuctionDetailPage({ params }: { params: Promise<{ id: st
           padding: 40px 0 80px;
         }
         
-        .detail-grid {
+        .detail-grid-3col {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 48px;
+          grid-template-columns: 1.2fr 1fr 0.8fr;
+          gap: 32px;
           margin-bottom: 60px;
+          align-items: start;
         }
         
-        @media (max-width: 1024px) {
-          .detail-grid {
+        @media (max-width: 1280px) {
+          .detail-grid-3col {
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+          }
+          .gallery-column {
+            grid-column: 1 / -1;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .detail-grid-3col {
             grid-template-columns: 1fr;
-            gap: 32px;
+            gap: 24px;
           }
         }
         
-        .details-section {
+        .gallery-column {
+          position: sticky;
+          top: 100px;
+        }
+
+        .info-column {
           display: flex;
           flex-direction: column;
           gap: 24px;
+        }
+
+        .bidding-column {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          background: white;
+          padding: 24px;
+          border-radius: 16px;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+          position: sticky;
+          top: 100px;
         }
         
         .title-header {
@@ -281,13 +313,13 @@ export default function AuctionDetailPage({ params }: { params: Promise<{ id: st
         }
         
         .price-section {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          display: flex;
+          flex-direction: column;
           gap: 16px;
-          padding: 24px;
-          background: white;
-          border-radius: 16px;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+          border-radius: 12px;
+          border: 2px solid #3B82F6;
         }
         
         .price-group {
@@ -336,20 +368,20 @@ export default function AuctionDetailPage({ params }: { params: Promise<{ id: st
         .timer-section {
           display: flex;
           align-items: center;
-          gap: 16px;
-          padding: 20px;
-          background: white;
-          border-radius: 12px;
+          gap: 12px;
+          padding: 16px;
+          background: #F3F4F6;
+          border-radius: 10px;
           border: 2px solid #E5E7EB;
         }
         
         .timer-section.warning {
-          background: #FEF3C7;
+          background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
           border-color: #F59E0B;
         }
         
         .timer-section.critical {
-          background: #FEE2E2;
+          background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
           border-color: #EF4444;
         }
         
@@ -440,36 +472,50 @@ export default function AuctionDetailPage({ params }: { params: Promise<{ id: st
         
         .support-section {
           display: flex;
+          flex-direction: column;
           align-items: center;
-          gap: 16px;
+          gap: 12px;
           padding: 20px;
-          background: rgba(76, 175, 80, 0.05);
+          background: linear-gradient(135deg, rgba(6, 78, 59, 0.05) 0%, rgba(5, 150, 105, 0.08) 100%);
           border-radius: 12px;
-          border: 1px solid rgba(76, 175, 80, 0.2);
+          border: 1px solid rgba(6, 78, 59, 0.15);
+          text-align: center;
+        }
+        
+        .support-section svg {
+          color: #059669;
         }
         
         .support-section h4 {
-          font-size: 16px;
-          font-weight: 600;
-          color: #111827;
-          margin-bottom: 4px;
+          font-size: 15px;
+          font-weight: 700;
+          color: #064E3B;
+          margin: 0;
         }
         
         .support-section p {
           font-size: 13px;
-          color: #6B7280;
+          color: #065F46;
+          margin: 0;
         }
         
         .support-btn {
-          margin-left: auto;
-          padding: 10px 20px;
-          background: #4CAF50;
+          width: 100%;
+          padding: 12px 20px;
+          background: linear-gradient(135deg, #059669 0%, #10B981 100%);
           color: white;
           border: none;
-          border-radius: 8px;
+          border-radius: 10px;
           font-size: 14px;
-          font-weight: 600;
+          font-weight: 700;
           cursor: pointer;
+          transition: all 0.3s;
+        }
+
+        .support-btn:hover {
+          background: linear-gradient(135deg, #047857 0%, #059669 100%);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
         }
         
         .bids-history-section {
