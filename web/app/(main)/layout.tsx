@@ -288,15 +288,15 @@ export default function MainLayout({
           padding: 10px 16px;
           border-radius: 10px;
           text-decoration: none;
-          color: #6B7280;
+          color: #1F2937;
           font-size: 14px;
-          font-weight: 500;
+          font-weight: 600;
           transition: all 0.2s;
         }
 
         .nav-link:hover {
           background: #F3F4F6;
-          color: #374151;
+          color: #111827;
         }
 
         .nav-link.active {
@@ -327,13 +327,13 @@ export default function MainLayout({
           border: none;
           border-radius: 10px;
           cursor: pointer;
-          color: #6B7280;
+          color: #374151;
           transition: all 0.2s;
         }
 
         .action-btn:hover {
           background: #F3F4F6;
-          color: #374151;
+          color: #111827;
         }
 
         .badge {

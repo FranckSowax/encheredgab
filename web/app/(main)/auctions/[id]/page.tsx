@@ -216,6 +216,12 @@ export default function AuctionDetailPage({ params }: { params: Promise<{ id: st
           background: #F9FAFB;
           padding: 40px 0 80px;
         }
+
+        .container {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 0 24px;
+        }
         
         .detail-grid-3col {
           display: grid;
