@@ -75,13 +75,15 @@ export default function AdminDashboard() {
 
   return (
     <div className="dashboard">
-      {/* Page Header */}
+      {/* Page Header avec Actions */}
       <div className="page-header">
-        <div>
-          <h1 className="page-title">Dashboard</h1>
-          <p className="page-subtitle">Bienvenue dans votre espace d'administration</p>
+        <div className="header-left">
+          <div className="greeting">
+            <h1 className="page-title">👋 Bonjour, Admin!</h1>
+            <p className="page-subtitle">Voici un aperçu de votre activité aujourd'hui</p>
+          </div>
         </div>
-        <div className="header-actions">
+        <div className="header-right">
           <select 
             value={timeRange}
             onChange={(e) => setTimeRange(e.target.value)}
@@ -92,6 +94,37 @@ export default function AdminDashboard() {
             <option value="year">Cette année</option>
           </select>
         </div>
+      </div>
+
+      {/* Quick Actions - Déplacées en haut */}
+      <div className="quick-actions-top">
+        <button className="action-card primary">
+          <div className="action-icon">
+            <Package size={24} />
+          </div>
+          <div className="action-content">
+            <div className="action-title">Nouveau Lot</div>
+            <div className="action-subtitle">Ajouter un produit</div>
+          </div>
+        </button>
+        <button className="action-card secondary">
+          <div className="action-icon">
+            <Gavel size={24} />
+          </div>
+          <div className="action-content">
+            <div className="action-title">Créer Enchère</div>
+            <div className="action-subtitle">Lancer une vente</div>
+          </div>
+        </button>
+        <button className="action-card tertiary">
+          <div className="action-icon">
+            <Users size={24} />
+          </div>
+          <div className="action-content">
+            <div className="action-title">Utilisateurs</div>
+            <div className="action-subtitle">Gérer les comptes</div>
+          </div>
+        </button>
       </div>
 
       {/* Stats Grid */}
@@ -177,22 +210,6 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* Quick Actions */}
-      <div className="quick-actions">
-        <button className="action-btn primary">
-          <Package size={20} />
-          Ajouter un Lot
-        </button>
-        <button className="action-btn secondary">
-          <Gavel size={20} />
-          Créer une Enchère
-        </button>
-        <button className="action-btn secondary">
-          <Users size={20} />
-          Gérer les Utilisateurs
-        </button>
-      </div>
-
       <style jsx>{`
         .dashboard {
           max-width: 1400px;
@@ -202,52 +219,193 @@ export default function AdminDashboard() {
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
-          margin-bottom: 32px;
+          margin-bottom: 24px;
           gap: 24px;
         }
 
+        .header-left {
+          flex: 1;
+        }
+
+        .greeting {
+          background: linear-gradient(135deg, #F0FDF4 0%, #D1FAE5 100%);
+          padding: 24px;
+          border-radius: 16px;
+          border: 1px solid #A7F3D0;
+        }
+
         .page-title {
-          font-size: 32px;
+          font-size: 28px;
           font-weight: 700;
           color: #111827;
           margin-bottom: 8px;
         }
 
         .page-subtitle {
-          color: #6B7280;
-          font-size: 16px;
+          color: #059669;
+          font-size: 15px;
+          font-weight: 500;
+        }
+
+        .header-right {
+          display: flex;
+          align-items: center;
+          gap: 12px;
         }
 
         .time-select {
-          padding: 10px 16px;
-          border: 1px solid #E5E7EB;
-          border-radius: 10px;
+          padding: 12px 18px;
+          border: 2px solid #E5E7EB;
+          border-radius: 12px;
           font-size: 14px;
-          font-weight: 500;
+          font-weight: 600;
           color: #374151;
           cursor: pointer;
           background: white;
+          transition: all 0.2s;
         }
 
-        /* Stats Grid */
+        .time-select:hover {
+          border-color: #059669;
+          box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+
+        /* Quick Actions Cards - En Haut */
+        .quick-actions-top {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 20px;
+          margin-bottom: 32px;
+        }
+
+        .action-card {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          padding: 20px;
+          border: none;
+          border-radius: 16px;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .action-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 100%);
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+
+        .action-card:hover::before {
+          opacity: 1;
+        }
+
+        .action-card.primary {
+          background: linear-gradient(135deg, #059669 0%, #047857 100%);
+          box-shadow: 0 4px 20px rgba(5, 150, 105, 0.3);
+        }
+
+        .action-card.primary:hover {
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 0 8px 30px rgba(5, 150, 105, 0.4);
+        }
+
+        .action-card.secondary {
+          background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+          box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .action-card.secondary:hover {
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .action-card.tertiary {
+          background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+          box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .action-card.tertiary:hover {
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .action-icon {
+          width: 56px;
+          height: 56px;
+          background: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(10px);
+          border-radius: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          flex-shrink: 0;
+        }
+
+        .action-content {
+          flex: 1;
+          text-align: left;
+        }
+
+        .action-title {
+          font-size: 17px;
+          font-weight: 700;
+          color: white;
+          margin-bottom: 4px;
+        }
+
+        .action-subtitle {
+          font-size: 13px;
+          color: rgba(255, 255, 255, 0.9);
+          font-weight: 500;
+        }
+
+        /* Stats Grid - Modernisé */
         .stats-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 24px;
+          gap: 20px;
           margin-bottom: 32px;
         }
 
         .stat-card {
           background: white;
-          border-radius: 16px;
-          padding: 24px;
-          border: 1px solid #E5E7EB;
-          transition: all 0.2s;
+          border-radius: 20px;
+          padding: 28px;
+          border: 2px solid #F3F4F6;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .stat-card::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          right: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(circle, rgba(5, 150, 105, 0.05) 0%, transparent 70%);
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+
+        .stat-card:hover::before {
+          opacity: 1;
         }
 
         .stat-card:hover {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-          transform: translateY(-2px);
+          border-color: #059669;
+          box-shadow: 0 8px 30px rgba(5, 150, 105, 0.15);
+          transform: translateY(-4px);
         }
 
         .stat-header {
@@ -258,50 +416,56 @@ export default function AdminDashboard() {
         }
 
         .stat-icon {
-          width: 48px;
-          height: 48px;
-          border-radius: 12px;
+          width: 56px;
+          height: 56px;
+          border-radius: 16px;
           display: flex;
           align-items: center;
           justify-content: center;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .stat-change {
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: 6px;
           font-size: 14px;
-          font-weight: 600;
-          padding: 6px 12px;
-          border-radius: 8px;
+          font-weight: 700;
+          padding: 8px 14px;
+          border-radius: 12px;
         }
 
         .stat-change.up {
           color: #059669;
-          background: #D1FAE5;
+          background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
         }
 
         .stat-change.down {
           color: #EF4444;
-          background: #FEE2E2;
+          background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
         }
 
         .stat-body {
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 10px;
         }
 
         .stat-label {
           font-size: 14px;
           color: #6B7280;
-          font-weight: 500;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
         }
 
         .stat-value {
-          font-size: 28px;
-          font-weight: 700;
-          color: #111827;
+          font-size: 32px;
+          font-weight: 800;
+          background: linear-gradient(135deg, #111827 0%, #374151 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
         /* Content Grid */
@@ -320,14 +484,23 @@ export default function AdminDashboard() {
 
         .card {
           background: white;
-          border-radius: 16px;
-          border: 1px solid #E5E7EB;
+          border-radius: 20px;
+          border: 2px solid #F3F4F6;
           overflow: hidden;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .card:hover {
+          border-color: #059669;
+          box-shadow: 0 8px 30px rgba(5, 150, 105, 0.12);
+          transform: translateY(-2px);
         }
 
         .card-header {
-          padding: 20px 24px;
-          border-bottom: 1px solid #F3F4F6;
+          padding: 24px 28px;
+          background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
+          border-bottom: 2px solid #E5E7EB;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -336,60 +509,81 @@ export default function AdminDashboard() {
         .card-title {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 12px;
           font-size: 18px;
-          font-weight: 600;
+          font-weight: 700;
           color: #111827;
         }
 
+        .card-title svg {
+          color: #059669;
+        }
+
         .see-all-btn {
-          background: none;
+          background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
           border: none;
           color: #059669;
-          font-size: 14px;
-          font-weight: 600;
+          font-size: 13px;
+          font-weight: 700;
           cursor: pointer;
+          padding: 8px 16px;
+          border-radius: 10px;
+          transition: all 0.2s;
+        }
+
+        .see-all-btn:hover {
+          background: linear-gradient(135deg, #A7F3D0 0%, #6EE7B7 100%);
+          transform: scale(1.05);
         }
 
         /* Activities */
         .activity-list {
-          padding: 16px 24px;
+          padding: 20px 28px;
         }
 
         .activity-item {
           display: flex;
           gap: 16px;
-          padding: 16px 0;
-          border-bottom: 1px solid #F3F4F6;
+          padding: 18px;
+          border-radius: 12px;
+          margin-bottom: 12px;
+          transition: all 0.2s;
+          background: #FAFBFC;
+        }
+
+        .activity-item:hover {
+          background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
+          transform: translateX(4px);
         }
 
         .activity-item:last-child {
-          border-bottom: none;
+          margin-bottom: 0;
         }
 
         .activity-icon {
-          width: 40px;
-          height: 40px;
-          border-radius: 10px;
+          width: 48px;
+          height: 48px;
+          border-radius: 14px;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .activity-icon.lot {
-          background: #DBEAFE;
-          color: #3B82F6;
+          background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+          color: #2563EB;
         }
 
         .activity-icon.win {
-          background: #D1FAE5;
-          color: #059669;
+          background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+          color: #047857;
         }
 
         .activity-icon.bid {
-          background: #FEF3C7;
-          color: #F59E0B;
+          background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+          color: #D97706;
         }
 
         .activity-content {
@@ -397,117 +591,153 @@ export default function AdminDashboard() {
         }
 
         .activity-text {
-          font-size: 14px;
-          color: #374151;
-          margin-bottom: 4px;
+          font-size: 15px;
+          color: #1F2937;
+          margin-bottom: 6px;
+          font-weight: 500;
+          line-height: 1.5;
+        }
+
+        .activity-text strong {
+          font-weight: 700;
+          color: #111827;
         }
 
         .activity-time {
-          font-size: 12px;
-          color: #9CA3AF;
+          font-size: 13px;
+          color: #6B7280;
+          font-weight: 500;
         }
 
         /* Auctions */
         .auction-list {
-          padding: 16px 24px;
+          padding: 20px 28px;
         }
 
         .auction-item {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 16px 0;
-          border-bottom: 1px solid #F3F4F6;
+          padding: 18px;
+          border-radius: 12px;
+          margin-bottom: 12px;
+          transition: all 0.2s;
+          background: #FAFBFC;
+        }
+
+        .auction-item:hover {
+          background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
+          transform: translateX(4px);
         }
 
         .auction-item:last-child {
-          border-bottom: none;
+          margin-bottom: 0;
+        }
+
+        .auction-info {
+          flex: 1;
         }
 
         .auction-title {
-          font-size: 15px;
-          font-weight: 600;
+          font-size: 16px;
+          font-weight: 700;
           color: #111827;
-          margin-bottom: 6px;
+          margin-bottom: 8px;
         }
 
         .auction-time {
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 8px;
           font-size: 13px;
           color: #6B7280;
+          font-weight: 500;
         }
 
-        .auction-status {
-          padding: 6px 12px;
-          border-radius: 8px;
-          font-size: 12px;
-          font-weight: 600;
-          white-space: nowrap;
-        }
-
-        .auction-status.active {
-          background: #D1FAE5;
+        .auction-time svg {
           color: #059669;
         }
 
-        .auction-status.upcoming {
-          background: #E0E7FF;
-          color: #6366F1;
-        }
-
-        /* Quick Actions */
-        .quick-actions {
-          display: flex;
-          gap: 16px;
-          flex-wrap: wrap;
-        }
-
-        .action-btn {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 14px 24px;
+        .auction-status {
+          padding: 8px 16px;
           border-radius: 12px;
-          font-size: 15px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.2s;
-          border: none;
+          font-size: 13px;
+          font-weight: 700;
+          white-space: nowrap;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
-        .action-btn.primary {
-          background: linear-gradient(135deg, #059669 0%, #047857 100%);
-          color: white;
-          box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+        .auction-status.active {
+          background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+          color: #047857;
         }
 
-        .action-btn.primary:hover {
-          box-shadow: 0 6px 16px rgba(5, 150, 105, 0.4);
-          transform: translateY(-2px);
+        .auction-status.upcoming {
+          background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%);
+          color: #4338CA;
         }
 
-        .action-btn.secondary {
-          background: #F9FAFB;
-          color: #374151;
-          border: 1px solid #E5E7EB;
-        }
-
-        .action-btn.secondary:hover {
-          background: #F3F4F6;
+        /* Responsive */
+        @media (max-width: 1024px) {
+          .quick-actions-top {
+            grid-template-columns: 1fr;
+          }
         }
 
         @media (max-width: 768px) {
           .page-header {
             flex-direction: column;
           }
+          
+          .header-right {
+            width: 100%;
+          }
+          
+          .time-select {
+            width: 100%;
+          }
+          
+          .greeting {
+            padding: 20px;
+          }
+          
+          .page-title {
+            font-size: 24px;
+          }
+          
           .stats-grid {
             grid-template-columns: 1fr;
           }
-          .action-btn {
-            width: 100%;
+          
+          .action-card {
             justify-content: center;
+          }
+          
+          .content-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .quick-actions-top {
+            gap: 12px;
+          }
+          
+          .action-card {
+            padding: 16px;
+          }
+          
+          .action-icon {
+            width: 48px;
+            height: 48px;
+          }
+          
+          .action-title {
+            font-size: 15px;
+          }
+          
+          .action-subtitle {
+            font-size: 12px;
           }
         }
       `}</style>
