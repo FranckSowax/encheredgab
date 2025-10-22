@@ -72,7 +72,6 @@ export default function AdminLayout({
         {/* Search Bar */}
         <div className="search-section">
           <div className="search-input">
-            <Search size={16} className="search-icon" />
             <input type="text" placeholder="Rechercher..." />
             <kbd className="search-kbd">⌘K</kbd>
           </div>
@@ -83,16 +82,13 @@ export default function AdminLayout({
           <div className="section-title">ACTIONS RAPIDES</div>
           <div className="quick-actions-grid">
             <button className="quick-action-btn">
-              <Plus size={16} />
-              <span>Lot</span>
+              <span>+ Lot</span>
             </button>
             <button className="quick-action-btn">
-              <Plus size={16} />
-              <span>Enchère</span>
+              <span>+ Enchère</span>
             </button>
             <button className="quick-action-btn">
-              <Plus size={16} />
-              <span>User</span>
+              <span>+ User</span>
             </button>
           </div>
         </div>
@@ -100,7 +96,6 @@ export default function AdminLayout({
         {/* Navigation */}
         <nav className="sidebar-nav">
           {navItems.map((item, index) => {
-            const Icon = item.icon
             const isActive = pathname === item.href
             
             return (
@@ -110,7 +105,6 @@ export default function AdminLayout({
                 className={`nav-item ${isActive ? 'active' : ''}`}
                 onClick={() => setSidebarOpen(false)}
               >
-                <Icon size={20} className="nav-icon" />
                 <span className="nav-label">{item.label}</span>
                 {item.badge && (
                   <span className="nav-badge">{item.badge}</span>
@@ -125,23 +119,19 @@ export default function AdminLayout({
           <div className="section-title">RÉCENTS</div>
           <div className="recent-items">
             <Link href="#" className="recent-item">
-              <Package size={14} />
-              <span>Lot #1234</span>
+              <span>• Lot #1234</span>
             </Link>
             <Link href="#" className="recent-item">
-              <Gavel size={14} />
-              <span>Enchère #5678</span>
+              <span>• Enchère #5678</span>
             </Link>
             <Link href="#" className="recent-item">
-              <Users size={14} />
-              <span>Utilisateur nouveau</span>
+              <span>• Utilisateur nouveau</span>
             </Link>
           </div>
         </div>
 
         {/* Logout */}
         <button className="logout-btn">
-          <LogOut size={20} className="logout-icon" />
           <span className="logout-label">Déconnexion</span>
         </button>
       </aside>
@@ -333,7 +323,7 @@ export default function AdminLayout({
           background: rgba(0, 0, 0, 0.2);
           border: 1px solid rgba(212, 175, 55, 0.2);
           border-radius: 10px;
-          padding: 10px 12px;
+          padding: 10px 14px;
           transition: all 0.3s;
         }
 
@@ -341,12 +331,6 @@ export default function AdminLayout({
           background: rgba(0, 0, 0, 0.3);
           border-color: rgba(212, 175, 55, 0.4);
           box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-        }
-
-        .search-icon {
-          color: rgba(212, 175, 55, 0.6);
-          flex-shrink: 0;
-          margin-right: 8px;
         }
 
         .search-input input {
@@ -401,15 +385,14 @@ export default function AdminLayout({
           background: rgba(212, 175, 55, 0.1);
           border: 1px solid rgba(212, 175, 55, 0.25);
           border-radius: 8px;
-          padding: 10px 8px;
+          padding: 12px 10px;
           display: flex;
-          flex-direction: column;
           align-items: center;
-          gap: 6px;
+          justify-content: center;
           cursor: pointer;
           transition: all 0.3s;
           color: rgba(255, 255, 255, 0.75);
-          font-size: 11px;
+          font-size: 12px;
           font-weight: 600;
         }
 
@@ -439,9 +422,7 @@ export default function AdminLayout({
         }
 
         .recent-item {
-          display: flex;
-          align-items: center;
-          gap: 10px;
+          display: block;
           padding: 8px 12px;
           border-radius: 8px;
           text-decoration: none;
@@ -457,15 +438,6 @@ export default function AdminLayout({
           color: #D4AF37;
           border-left-color: #D4AF37;
           transform: translateX(4px);
-        }
-
-        .recent-item svg {
-          flex-shrink: 0;
-          opacity: 0.7;
-        }
-
-        .recent-item:hover svg {
-          opacity: 1;
         }
 
         .sidebar-nav {
@@ -498,8 +470,7 @@ export default function AdminLayout({
           display: flex;
           flex-direction: row;
           align-items: center;
-          justify-content: flex-start;
-          gap: 12px;
+          justify-content: space-between;
           padding: 12px 16px;
           border-radius: 12px;
           text-decoration: none;
@@ -546,25 +517,6 @@ export default function AdminLayout({
 
         .nav-item.active::before {
           transform: scaleY(1);
-        }
-
-        .nav-item.active .nav-icon {
-          color: #D4AF37;
-        }
-
-        .nav-icon {
-          width: 20px;
-          height: 20px;
-          flex-shrink: 0;
-          transition: all 0.3s;
-        }
-
-        .nav-item:hover .nav-icon {
-          transform: scale(1.1);
-        }
-
-        .nav-item.active .nav-icon {
-          transform: scale(1);
         }
 
         .nav-label {
@@ -621,24 +573,14 @@ export default function AdminLayout({
           font-size: 14px;
           font-weight: 500;
           cursor: pointer;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 12px;
+          display: block;
+          text-align: center;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           width: calc(100% - 32px);
         }
 
-        .logout-icon {
-          width: 20px;
-          height: 20px;
-          flex-shrink: 0;
-        }
-
         .logout-label {
-          flex: 1 1 auto;
           line-height: 1.2;
-          text-align: left;
         }
 
         .logout-btn:hover {
@@ -646,10 +588,6 @@ export default function AdminLayout({
           border-color: rgba(220, 38, 38, 0.4);
           color: #FCA5A5;
           transform: translateX(4px);
-        }
-
-        .logout-btn:hover .logout-icon {
-          transform: scale(1.1);
         }
 
         .logout-btn:active {
