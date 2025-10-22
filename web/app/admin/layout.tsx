@@ -365,6 +365,8 @@ export default function AdminLayout({
           display: flex;
           flex-direction: column;
           gap: 10px;
+          width: 100%;
+          align-items: stretch;
         }
 
         .quick-action-btn {
@@ -375,11 +377,15 @@ export default function AdminLayout({
           display: flex;
           align-items: center;
           justify-content: center;
+          width: 100%;
+          min-height: 44px;
+          box-sizing: border-box;
           cursor: pointer;
           transition: all 0.3s;
           color: rgba(255, 255, 255, 0.75);
           font-size: 12px;
           font-weight: 600;
+          outline: none;
         }
 
         .quick-action-btn:hover {
@@ -388,6 +394,12 @@ export default function AdminLayout({
           color: #D4AF37;
           transform: translateY(-2px);
           box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+        }
+
+        .quick-action-btn:focus-visible {
+          outline: none;
+          border-color: rgba(212, 175, 55, 0.8);
+          box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25), 0 0 0 1px rgba(212, 175, 55, 0.9);
         }
 
         .quick-action-btn:active {
