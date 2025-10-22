@@ -312,8 +312,9 @@ export default function AdminLayout({
 
         /* Search Section */
         .search-section {
-          padding: 16px;
+          padding: 20px 16px;
           border-bottom: 2px solid rgba(212, 175, 55, 0.1);
+          margin-bottom: 8px;
         }
 
         .search-input {
@@ -362,8 +363,9 @@ export default function AdminLayout({
 
         /* Quick Actions Section */
         .quick-actions-section {
-          padding: 16px;
+          padding: 20px 16px;
           border-bottom: 2px solid rgba(212, 175, 55, 0.1);
+          margin-bottom: 8px;
         }
 
         .section-title {
@@ -371,7 +373,7 @@ export default function AdminLayout({
           font-weight: 700;
           color: rgba(212, 175, 55, 0.7);
           letter-spacing: 1px;
-          margin-bottom: 12px;
+          margin-bottom: 14px;
           text-transform: uppercase;
         }
 
@@ -410,7 +412,7 @@ export default function AdminLayout({
 
         /* Recents Section */
         .recents-section {
-          padding: 16px;
+          padding: 20px 16px;
           border-top: 2px solid rgba(212, 175, 55, 0.1);
           margin-top: auto;
         }
@@ -418,12 +420,13 @@ export default function AdminLayout({
         .recent-items {
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 6px;
+          margin-top: 8px;
         }
 
         .recent-item {
           display: block;
-          padding: 8px 12px;
+          padding: 10px 12px;
           border-radius: 8px;
           text-decoration: none;
           color: rgba(255, 255, 255, 0.65);
@@ -442,7 +445,7 @@ export default function AdminLayout({
 
         .sidebar-nav {
           flex: 1 1 auto;
-          padding: 16px;
+          padding: 20px 16px;
           overflow-y: auto;
           scrollbar-width: thin;
           scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
@@ -471,14 +474,14 @@ export default function AdminLayout({
           flex-direction: row;
           align-items: center;
           justify-content: space-between;
-          padding: 12px 16px;
+          padding: 13px 16px;
           border-radius: 12px;
           text-decoration: none;
           color: rgba(255, 255, 255, 0.75);
           font-size: 14px;
           font-weight: 500;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          margin-bottom: 6px;
+          margin-bottom: 8px;
           position: relative;
           border-left: 3px solid transparent;
           width: 100%;
@@ -564,8 +567,8 @@ export default function AdminLayout({
         }
 
         .logout-btn {
-          margin: 16px;
-          padding: 12px 16px;
+          margin: 20px 16px;
+          padding: 13px 16px;
           background: rgba(220, 38, 38, 0.1);
           border: 1px solid rgba(220, 38, 38, 0.2);
           border-radius: 12px;
