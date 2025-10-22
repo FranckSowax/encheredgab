@@ -34,15 +34,15 @@ export default function AdminLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const navItems = [
-    { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-    { href: '/admin/lots', label: 'Gestion des Lots', icon: Package },
-    { href: '/admin/auctions', label: 'Enchères', icon: Gavel },
-    { href: '/admin/users', label: 'Utilisateurs', icon: Users },
-    { href: '/admin/analytics', label: 'Statistiques', icon: BarChart3 },
-    { href: '/admin/media', label: 'Médiathèque', icon: ImageIcon },
-    { href: '/admin/messages', label: 'Messages', icon: MessageSquare },
-    { href: '/admin/reports', label: 'Rapports', icon: FileText },
-    { href: '/admin/settings', label: 'Paramètres', icon: Settings },
+    { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, badge: null },
+    { href: '/admin/lots', label: 'Gestion des Lots', icon: Package, badge: '24' },
+    { href: '/admin/auctions', label: 'Enchères', icon: Gavel, badge: '12' },
+    { href: '/admin/users', label: 'Utilisateurs', icon: Users, badge: null },
+    { href: '/admin/analytics', label: 'Statistiques', icon: BarChart3, badge: null },
+    { href: '/admin/media', label: 'Médiathèque', icon: ImageIcon, badge: null },
+    { href: '/admin/messages', label: 'Messages', icon: MessageSquare, badge: '3' },
+    { href: '/admin/reports', label: 'Rapports', icon: FileText, badge: null },
+    { href: '/admin/settings', label: 'Paramètres', icon: Settings, badge: null },
   ]
 
   return (
@@ -52,8 +52,13 @@ export default function AdminLayout({
         {/* Logo */}
         <div className="sidebar-header">
           <div className="logo">
-            <div className="logo-icon">D</div>
-            <span className="logo-text">Douane Enchères</span>
+            <div className="logo-icon">
+              <Gavel size={24} />
+            </div>
+            <div className="logo-content">
+              <span className="logo-text">Douane</span>
+              <span className="logo-subtitle">Enchères</span>
+            </div>
           </div>
           <button 
             className="close-btn lg:hidden"
@@ -65,7 +70,7 @@ export default function AdminLayout({
 
         {/* Navigation */}
         <nav className="sidebar-nav">
-          {navItems.map((item) => {
+          {navItems.map((item, index) => {
             const Icon = item.icon
             const isActive = pathname === item.href
             
@@ -76,8 +81,13 @@ export default function AdminLayout({
                 className={`nav-item ${isActive ? 'active' : ''}`}
                 onClick={() => setSidebarOpen(false)}
               >
-                <Icon size={20} />
-                <span>{item.label}</span>
+                <div className="nav-icon">
+                  <Icon size={20} />
+                </div>
+                <span className="nav-label">{item.label}</span>
+                {item.badge && (
+                  <span className="nav-badge">{item.badge}</span>
+                )}
               </Link>
             )
           })}
@@ -174,36 +184,58 @@ export default function AdminLayout({
         }
 
         .sidebar-header {
-          padding: 24px;
+          padding: 28px 24px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+          background: rgba(0, 0, 0, 0.1);
         }
 
         .logo {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 14px;
         }
 
         .logo-icon {
-          width: 40px;
-          height: 40px;
+          width: 48px;
+          height: 48px;
           background: white;
-          border-radius: 12px;
+          border-radius: 14px;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-weight: 700;
           color: #059669;
-          font-size: 20px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          transition: all 0.3s;
+        }
+
+        .logo-icon:hover {
+          transform: rotate(10deg) scale(1.05);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-content {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
         }
 
         .logo-text {
           font-size: 18px;
-          font-weight: 700;
+          font-weight: 800;
           color: white;
+          line-height: 1;
+          letter-spacing: -0.5px;
+        }
+
+        .logo-subtitle {
+          font-size: 12px;
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.8);
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
         }
 
         .close-btn {
@@ -218,51 +250,169 @@ export default function AdminLayout({
           flex: 1;
           padding: 24px 16px;
           overflow-y: auto;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+        }
+
+        .sidebar-nav::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.3);
+          border-radius: 10px;
         }
 
         .nav-item {
           display: flex;
           align-items: center;
-          gap: 12px;
-          padding: 12px 16px;
-          border-radius: 12px;
+          gap: 14px;
+          padding: 14px 16px;
+          border-radius: 14px;
           text-decoration: none;
-          color: rgba(255, 255, 255, 0.8);
+          color: rgba(255, 255, 255, 0.85);
           font-size: 15px;
-          font-weight: 500;
-          transition: all 0.2s;
-          margin-bottom: 4px;
+          font-weight: 600;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          margin-bottom: 6px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .nav-item::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          background: white;
+          transform: translateX(-4px);
+          transition: transform 0.3s;
+        }
+
+        .nav-item:hover::before {
+          transform: translateX(0);
         }
 
         .nav-item:hover {
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.15);
           color: white;
+          transform: translateX(4px);
+          padding-left: 20px;
         }
 
         .nav-item.active {
           background: white;
           color: #059669;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+          transform: translateX(0);
+        }
+
+        .nav-item.active::before {
+          transform: translateX(0);
+          background: #059669;
+        }
+
+        .nav-item.active .nav-icon {
+          background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+        }
+
+        .nav-icon {
+          width: 38px;
+          height: 38px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 10px;
+          background: rgba(255, 255, 255, 0.1);
+          flex-shrink: 0;
+          transition: all 0.3s;
+        }
+
+        .nav-item:hover .nav-icon {
+          background: rgba(255, 255, 255, 0.2);
+          transform: scale(1.1);
+        }
+
+        .nav-item.active .nav-icon {
+          transform: scale(1);
+        }
+
+        .nav-label {
+          flex: 1;
+          font-weight: 600;
+        }
+
+        .nav-badge {
+          min-width: 24px;
+          height: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.2);
+          color: white;
+          border-radius: 8px;
+          font-size: 12px;
+          font-weight: 700;
+          padding: 0 8px;
+          transition: all 0.3s;
+        }
+
+        .nav-item.active .nav-badge {
+          background: #059669;
+          color: white;
+        }
+
+        .nav-item:hover .nav-badge {
+          background: rgba(255, 255, 255, 0.3);
+          transform: scale(1.1);
         }
 
         .logout-btn {
           margin: 16px;
-          padding: 12px 16px;
-          background: rgba(239, 68, 68, 0.1);
-          border: none;
-          border-radius: 12px;
+          padding: 14px 16px;
+          background: rgba(239, 68, 68, 0.15);
+          border: 2px solid rgba(239, 68, 68, 0.3);
+          border-radius: 14px;
           color: #FCA5A5;
           font-size: 15px;
-          font-weight: 500;
+          font-weight: 700;
           cursor: pointer;
           display: flex;
           align-items: center;
-          gap: 12px;
-          transition: all 0.2s;
+          gap: 14px;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .logout-btn::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.2) 100%);
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+
+        .logout-btn:hover::before {
+          opacity: 1;
         }
 
         .logout-btn:hover {
-          background: rgba(239, 68, 68, 0.2);
+          background: rgba(239, 68, 68, 0.25);
+          border-color: rgba(239, 68, 68, 0.5);
+          color: #FEE2E2;
+          transform: translateX(4px);
+        }
+
+        .logout-btn:active {
+          transform: translateX(2px) scale(0.98);
         }
 
         .sidebar-overlay {
