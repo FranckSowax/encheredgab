@@ -83,7 +83,7 @@ export async function POST(
     const result = await notifyOutbid({
       to: user.phone,
       userName: user.full_name || 'Enchérisseur',
-      lotTitle: auction.lots?.title || 'Lot',
+      lotTitle: Array.isArray(auction.lots) && auction.lots[0]?.title || 'Lot',
       previousBid: Number(lastBid.amount),
       newBid: Number(new_bid_amount),
       auctionId: auction.id,
