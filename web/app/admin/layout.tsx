@@ -299,7 +299,9 @@ export default function AdminLayout({
 
         .nav-item {
           display: flex;
+          flex-direction: row;
           align-items: center;
+          justify-content: flex-start;
           gap: 12px;
           padding: 12px 16px;
           border-radius: 12px;
@@ -311,7 +313,7 @@ export default function AdminLayout({
           margin-bottom: 6px;
           position: relative;
           border-left: 3px solid transparent;
-          white-space: nowrap;
+          width: 100%;
         }
 
         .nav-item::before {
@@ -369,9 +371,13 @@ export default function AdminLayout({
         }
 
         .nav-label {
-          flex: 1;
+          flex: 1 1 auto;
           font-weight: 500;
           line-height: 1.2;
+          min-width: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
         .nav-item.active .nav-label {
@@ -379,9 +385,9 @@ export default function AdminLayout({
         }
 
         .nav-badge {
-          min-width: 22px;
+          min-width: 24px;
           height: 22px;
-          display: flex;
+          display: inline-flex;
           align-items: center;
           justify-content: center;
           background: rgba(212, 175, 55, 0.2);
@@ -389,11 +395,11 @@ export default function AdminLayout({
           border-radius: 6px;
           font-size: 11px;
           font-weight: 700;
-          padding: 0 6px;
+          padding: 0 8px;
           transition: all 0.3s;
           border: 1px solid rgba(212, 175, 55, 0.3);
           flex-shrink: 0;
-          margin-left: auto;
+          flex-grow: 0;
         }
 
         .nav-item.active .nav-badge {
@@ -419,10 +425,11 @@ export default function AdminLayout({
           font-weight: 500;
           cursor: pointer;
           display: flex;
+          flex-direction: row;
           align-items: center;
           gap: 12px;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          white-space: nowrap;
+          width: calc(100% - 32px);
         }
 
         .logout-icon {
@@ -432,8 +439,9 @@ export default function AdminLayout({
         }
 
         .logout-label {
-          flex: 1;
+          flex: 1 1 auto;
           line-height: 1.2;
+          text-align: left;
         }
 
         .logout-btn:hover {
