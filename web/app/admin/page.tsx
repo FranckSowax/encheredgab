@@ -228,23 +228,23 @@ export default function AdminDashboard() {
         }
 
         .greeting {
-          background: linear-gradient(135deg, #F0FDF4 0%, #D1FAE5 100%);
-          padding: 24px;
-          border-radius: 16px;
-          border: 1px solid #A7F3D0;
+          background: transparent;
+          padding: 0;
+          border-radius: 0;
+          border: none;
         }
 
         .page-title {
-          font-size: 28px;
+          font-size: 32px;
           font-weight: 700;
-          color: #111827;
-          margin-bottom: 8px;
+          color: #1A202C;
+          margin-bottom: 6px;
         }
 
         .page-subtitle {
-          color: #059669;
-          font-size: 15px;
-          font-weight: 500;
+          color: #718096;
+          font-size: 14px;
+          font-weight: 400;
         }
 
         .header-right {
@@ -308,41 +308,40 @@ export default function AdminDashboard() {
         }
 
         .action-card.primary {
-          background: linear-gradient(135deg, #059669 0%, #047857 100%);
-          box-shadow: 0 4px 20px rgba(5, 150, 105, 0.3);
+          background: #1B5E3F;
+          box-shadow: 0 2px 8px rgba(27, 94, 63, 0.15);
         }
 
         .action-card.primary:hover {
-          transform: translateY(-4px) scale(1.02);
-          box-shadow: 0 8px 30px rgba(5, 150, 105, 0.4);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 16px rgba(27, 94, 63, 0.25);
         }
 
         .action-card.secondary {
-          background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
-          box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+          background: #1B5E3F;
+          box-shadow: 0 2px 8px rgba(27, 94, 63, 0.15);
         }
 
         .action-card.secondary:hover {
-          transform: translateY(-4px) scale(1.02);
-          box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 16px rgba(27, 94, 63, 0.25);
         }
 
         .action-card.tertiary {
-          background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
-          box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+          background: #1B5E3F;
+          box-shadow: 0 2px 8px rgba(27, 94, 63, 0.15);
         }
 
         .action-card.tertiary:hover {
-          transform: translateY(-4px) scale(1.02);
-          box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 16px rgba(27, 94, 63, 0.25);
         }
 
         .action-icon {
-          width: 56px;
-          height: 56px;
-          background: rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(10px);
-          border-radius: 14px;
+          width: 48px;
+          height: 48px;
+          background: rgba(255, 255, 255, 0.15);
+          border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -356,16 +355,16 @@ export default function AdminDashboard() {
         }
 
         .action-title {
-          font-size: 17px;
-          font-weight: 700;
+          font-size: 16px;
+          font-weight: 600;
           color: white;
           margin-bottom: 4px;
         }
 
         .action-subtitle {
           font-size: 13px;
-          color: rgba(255, 255, 255, 0.9);
-          font-weight: 500;
+          color: rgba(255, 255, 255, 0.85);
+          font-weight: 400;
         }
 
         /* Stats Grid - Modernisé */
@@ -378,34 +377,22 @@ export default function AdminDashboard() {
 
         .stat-card {
           background: white;
-          border-radius: 20px;
-          padding: 28px;
-          border: 2px solid #F3F4F6;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          border-radius: 16px;
+          padding: 24px;
+          border: 1px solid #E8EBED;
+          transition: all 0.2s ease;
           position: relative;
           overflow: hidden;
         }
 
         .stat-card::before {
-          content: '';
-          position: absolute;
-          top: -50%;
-          right: -50%;
-          width: 200%;
-          height: 200%;
-          background: radial-gradient(circle, rgba(5, 150, 105, 0.05) 0%, transparent 70%);
-          opacity: 0;
-          transition: opacity 0.3s;
-        }
-
-        .stat-card:hover::before {
-          opacity: 1;
+          display: none;
         }
 
         .stat-card:hover {
-          border-color: #059669;
-          box-shadow: 0 8px 30px rgba(5, 150, 105, 0.15);
-          transform: translateY(-4px);
+          border-color: #CBD5E0;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+          transform: translateY(-2px);
         }
 
         .stat-header {
@@ -416,56 +403,57 @@ export default function AdminDashboard() {
         }
 
         .stat-icon {
-          width: 56px;
-          height: 56px;
-          border-radius: 16px;
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+          box-shadow: none;
         }
 
         .stat-change {
           display: flex;
           align-items: center;
-          gap: 6px;
-          font-size: 14px;
-          font-weight: 700;
-          padding: 8px 14px;
-          border-radius: 12px;
+          gap: 4px;
+          font-size: 12px;
+          font-weight: 600;
+          padding: 4px 8px;
+          border-radius: 6px;
         }
 
         .stat-change.up {
-          color: #059669;
-          background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+          color: #1B5E3F;
+          background: #F0F9F4;
         }
 
         .stat-change.down {
-          color: #EF4444;
-          background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+          color: #DC2626;
+          background: #FEF2F2;
         }
 
         .stat-body {
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: 8px;
         }
 
         .stat-label {
-          font-size: 14px;
-          color: #6B7280;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
+          font-size: 13px;
+          color: #718096;
+          font-weight: 500;
+          text-transform: none;
+          letter-spacing: 0;
         }
 
         .stat-value {
           font-size: 32px;
-          font-weight: 800;
-          background: linear-gradient(135deg, #111827 0%, #374151 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          font-weight: 700;
+          color: #1A202C;
+          background: none;
+          -webkit-background-clip: unset;
+          -webkit-text-fill-color: unset;
+          background-clip: unset;
         }
 
         /* Content Grid */
@@ -484,23 +472,23 @@ export default function AdminDashboard() {
 
         .card {
           background: white;
-          border-radius: 20px;
-          border: 2px solid #F3F4F6;
+          border-radius: 16px;
+          border: 1px solid #E8EBED;
           overflow: hidden;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+          transition: all 0.2s ease;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .card:hover {
-          border-color: #059669;
-          box-shadow: 0 8px 30px rgba(5, 150, 105, 0.12);
+          border-color: #CBD5E0;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
           transform: translateY(-2px);
         }
 
         .card-header {
-          padding: 24px 28px;
-          background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
-          border-bottom: 2px solid #E5E7EB;
+          padding: 20px 24px;
+          background: white;
+          border-bottom: 1px solid #E8EBED;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -509,31 +497,30 @@ export default function AdminDashboard() {
         .card-title {
           display: flex;
           align-items: center;
-          gap: 12px;
-          font-size: 18px;
-          font-weight: 700;
-          color: #111827;
+          gap: 10px;
+          font-size: 16px;
+          font-weight: 600;
+          color: #1A202C;
         }
 
         .card-title svg {
-          color: #059669;
+          color: #718096;
         }
 
         .see-all-btn {
-          background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+          background: transparent;
           border: none;
-          color: #059669;
+          color: #1B5E3F;
           font-size: 13px;
-          font-weight: 700;
+          font-weight: 600;
           cursor: pointer;
-          padding: 8px 16px;
-          border-radius: 10px;
+          padding: 6px 12px;
+          border-radius: 8px;
           transition: all 0.2s;
         }
 
         .see-all-btn:hover {
-          background: linear-gradient(135deg, #A7F3D0 0%, #6EE7B7 100%);
-          transform: scale(1.05);
+          background: #F0F9F4;
         }
 
         /* Activities */
@@ -541,48 +528,56 @@ export default function AdminDashboard() {
           padding: 20px 28px;
         }
 
+        .admin-layout {
+          display: flex;
+          min-height: 100vh;
+          background: #F7FAFC;
+        }
+
         .activity-item {
           display: flex;
-          gap: 16px;
-          padding: 18px;
-          border-radius: 12px;
-          margin-bottom: 12px;
+          gap: 14px;
+          padding: 14px 0;
+          border-bottom: 1px solid #F7FAFC;
+          margin-bottom: 0;
           transition: all 0.2s;
-          background: #FAFBFC;
+          background: transparent;
         }
 
         .activity-item:hover {
-          background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
-          transform: translateX(4px);
+          background: #F7FAFC;
+          padding-left: 8px;
+          padding-right: 8px;
+          border-radius: 8px;
         }
 
         .activity-item:last-child {
-          margin-bottom: 0;
+          border-bottom: none;
         }
 
         .activity-icon {
-          width: 48px;
-          height: 48px;
-          border-radius: 14px;
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+          box-shadow: none;
         }
 
         .activity-icon.lot {
-          background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+          background: #DBEAFE;
           color: #2563EB;
         }
 
         .activity-icon.win {
-          background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
-          color: #047857;
+          background: #F0F9F4;
+          color: #1B5E3F;
         }
 
         .activity-icon.bid {
-          background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+          background: #FEF3C7;
           color: #D97706;
         }
 
@@ -591,22 +586,22 @@ export default function AdminDashboard() {
         }
 
         .activity-text {
-          font-size: 15px;
-          color: #1F2937;
-          margin-bottom: 6px;
-          font-weight: 500;
+          font-size: 14px;
+          color: #1A202C;
+          margin-bottom: 4px;
+          font-weight: 400;
           line-height: 1.5;
         }
 
         .activity-text strong {
-          font-weight: 700;
-          color: #111827;
+          font-weight: 600;
+          color: #1A202C;
         }
 
         .activity-time {
-          font-size: 13px;
-          color: #6B7280;
-          font-weight: 500;
+          font-size: 12px;
+          color: #718096;
+          font-weight: 400;
         }
 
         /* Auctions */
@@ -618,20 +613,22 @@ export default function AdminDashboard() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 18px;
-          border-radius: 12px;
-          margin-bottom: 12px;
+          padding: 14px 0;
+          border-bottom: 1px solid #F7FAFC;
+          margin-bottom: 0;
           transition: all 0.2s;
-          background: #FAFBFC;
+          background: transparent;
         }
 
         .auction-item:hover {
-          background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
-          transform: translateX(4px);
+          background: #F7FAFC;
+          padding-left: 8px;
+          padding-right: 8px;
+          border-radius: 8px;
         }
 
         .auction-item:last-child {
-          margin-bottom: 0;
+          border-bottom: none;
         }
 
         .auction-info {
@@ -639,41 +636,41 @@ export default function AdminDashboard() {
         }
 
         .auction-title {
-          font-size: 16px;
-          font-weight: 700;
-          color: #111827;
-          margin-bottom: 8px;
+          font-size: 14px;
+          font-weight: 600;
+          color: #1A202C;
+          margin-bottom: 6px;
         }
 
         .auction-time {
           display: flex;
           align-items: center;
-          gap: 8px;
-          font-size: 13px;
-          color: #6B7280;
-          font-weight: 500;
+          gap: 6px;
+          font-size: 12px;
+          color: #718096;
+          font-weight: 400;
         }
 
         .auction-time svg {
-          color: #059669;
+          color: #718096;
         }
 
         .auction-status {
-          padding: 8px 16px;
-          border-radius: 12px;
-          font-size: 13px;
-          font-weight: 700;
+          padding: 6px 12px;
+          border-radius: 8px;
+          font-size: 12px;
+          font-weight: 600;
           white-space: nowrap;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+          box-shadow: none;
         }
 
         .auction-status.active {
-          background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
-          color: #047857;
+          background: #F0F9F4;
+          color: #1B5E3F;
         }
 
         .auction-status.upcoming {
-          background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%);
+          background: #EEF2FF;
           color: #4338CA;
         }
 

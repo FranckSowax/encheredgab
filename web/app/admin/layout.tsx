@@ -163,7 +163,7 @@ export default function AdminLayout({
         /* Sidebar */
         .sidebar {
           width: 280px;
-          background: linear-gradient(180deg, #059669 0%, #047857 100%);
+          background: #FAFBFC;
           display: flex;
           flex-direction: column;
           position: fixed;
@@ -172,6 +172,7 @@ export default function AdminLayout({
           bottom: 0;
           z-index: 50;
           transition: transform 0.3s ease;
+          border-right: 1px solid #E8EBED;
         }
 
         @media (max-width: 1024px) {
@@ -184,36 +185,35 @@ export default function AdminLayout({
         }
 
         .sidebar-header {
-          padding: 28px 24px;
+          padding: 24px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          border-bottom: 2px solid rgba(255, 255, 255, 0.15);
-          background: rgba(0, 0, 0, 0.1);
+          border-bottom: 1px solid #E8EBED;
+          background: white;
         }
 
         .logo {
           display: flex;
           align-items: center;
-          gap: 14px;
+          gap: 12px;
         }
 
         .logo-icon {
-          width: 48px;
-          height: 48px;
-          background: white;
-          border-radius: 14px;
+          width: 40px;
+          height: 40px;
+          background: #1B5E3F;
+          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #059669;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          color: white;
           transition: all 0.3s;
         }
 
         .logo-icon:hover {
-          transform: rotate(10deg) scale(1.05);
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+          transform: scale(1.05);
+          box-shadow: 0 4px 12px rgba(27, 94, 63, 0.3);
         }
 
         .logo-content {
@@ -224,26 +224,32 @@ export default function AdminLayout({
 
         .logo-text {
           font-size: 18px;
-          font-weight: 800;
-          color: white;
+          font-weight: 700;
+          color: #1A202C;
           line-height: 1;
-          letter-spacing: -0.5px;
+          letter-spacing: -0.3px;
         }
 
         .logo-subtitle {
-          font-size: 12px;
-          font-weight: 600;
-          color: rgba(255, 255, 255, 0.8);
-          letter-spacing: 0.5px;
-          text-transform: uppercase;
+          font-size: 11px;
+          font-weight: 500;
+          color: #718096;
+          letter-spacing: 0.3px;
         }
 
         .close-btn {
           background: none;
           border: none;
-          color: white;
+          color: #718096;
           cursor: pointer;
           padding: 4px;
+          border-radius: 6px;
+          transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+          background: #F7FAFC;
+          color: #1A202C;
         }
 
         .sidebar-nav {
@@ -255,7 +261,7 @@ export default function AdminLayout({
         }
 
         .sidebar-nav::-webkit-scrollbar {
-          width: 6px;
+          width: 4px;
         }
 
         .sidebar-nav::-webkit-scrollbar-track {
@@ -263,156 +269,117 @@ export default function AdminLayout({
         }
 
         .sidebar-nav::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.3);
+          background: #E2E8F0;
           border-radius: 10px;
         }
 
         .nav-item {
           display: flex;
           align-items: center;
-          gap: 14px;
-          padding: 14px 16px;
-          border-radius: 14px;
+          gap: 12px;
+          padding: 11px 16px;
+          border-radius: 10px;
           text-decoration: none;
-          color: rgba(255, 255, 255, 0.85);
-          font-size: 15px;
-          font-weight: 600;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          margin-bottom: 6px;
+          color: #64748B;
+          font-size: 14px;
+          font-weight: 500;
+          transition: all 0.2s ease;
+          margin-bottom: 4px;
           position: relative;
-          overflow: hidden;
+          border-left: 3px solid transparent;
         }
 
         .nav-item::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 0;
-          bottom: 0;
-          width: 4px;
-          background: white;
-          transform: translateX(-4px);
-          transition: transform 0.3s;
-        }
-
-        .nav-item:hover::before {
-          transform: translateX(0);
+          display: none;
         }
 
         .nav-item:hover {
-          background: rgba(255, 255, 255, 0.15);
-          color: white;
-          transform: translateX(4px);
-          padding-left: 20px;
+          background: #F7FAFC;
+          color: #1A202C;
+          border-left-color: transparent;
         }
 
         .nav-item.active {
-          background: white;
-          color: #059669;
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-          transform: translateX(0);
-        }
-
-        .nav-item.active::before {
-          transform: translateX(0);
-          background: #059669;
+          background: #F0F9F4;
+          color: #1B5E3F;
+          border-left-color: #1B5E3F;
+          font-weight: 600;
         }
 
         .nav-item.active .nav-icon {
-          background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+          background: #1B5E3F;
+          color: white;
         }
 
         .nav-icon {
-          width: 38px;
-          height: 38px;
+          width: 20px;
+          height: 20px;
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 10px;
-          background: rgba(255, 255, 255, 0.1);
           flex-shrink: 0;
-          transition: all 0.3s;
+          transition: all 0.2s;
         }
 
         .nav-item:hover .nav-icon {
-          background: rgba(255, 255, 255, 0.2);
-          transform: scale(1.1);
+          transform: none;
         }
 
         .nav-item.active .nav-icon {
-          transform: scale(1);
+          transform: none;
         }
 
         .nav-label {
           flex: 1;
-          font-weight: 600;
         }
 
         .nav-badge {
-          min-width: 24px;
-          height: 24px;
+          min-width: 22px;
+          height: 22px;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(255, 255, 255, 0.2);
-          color: white;
-          border-radius: 8px;
-          font-size: 12px;
+          background: #E2E8F0;
+          color: #64748B;
+          border-radius: 6px;
+          font-size: 11px;
           font-weight: 700;
-          padding: 0 8px;
-          transition: all 0.3s;
+          padding: 0 6px;
+          transition: all 0.2s;
         }
 
         .nav-item.active .nav-badge {
-          background: #059669;
+          background: #1B5E3F;
           color: white;
         }
 
         .nav-item:hover .nav-badge {
-          background: rgba(255, 255, 255, 0.3);
-          transform: scale(1.1);
+          background: #CBD5E0;
         }
 
         .logout-btn {
           margin: 16px;
-          padding: 14px 16px;
-          background: rgba(239, 68, 68, 0.15);
-          border: 2px solid rgba(239, 68, 68, 0.3);
-          border-radius: 14px;
-          color: #FCA5A5;
-          font-size: 15px;
-          font-weight: 700;
+          padding: 11px 16px;
+          background: transparent;
+          border: none;
+          border-radius: 10px;
+          color: #64748B;
+          font-size: 14px;
+          font-weight: 500;
           cursor: pointer;
           display: flex;
           align-items: center;
-          gap: 14px;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .logout-btn::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.2) 100%);
-          opacity: 0;
-          transition: opacity 0.3s;
-        }
-
-        .logout-btn:hover::before {
-          opacity: 1;
+          gap: 12px;
+          transition: all 0.2s ease;
         }
 
         .logout-btn:hover {
-          background: rgba(239, 68, 68, 0.25);
-          border-color: rgba(239, 68, 68, 0.5);
-          color: #FEE2E2;
-          transform: translateX(4px);
+          background: #FEF2F2;
+          color: #DC2626;
         }
 
         .logout-btn:active {
-          transform: translateX(2px) scale(0.98);
+          transform: scale(0.98);
         }
 
         .sidebar-overlay {
