@@ -81,9 +81,7 @@ export default function AdminLayout({
                 className={`nav-item ${isActive ? 'active' : ''}`}
                 onClick={() => setSidebarOpen(false)}
               >
-                <div className="nav-icon">
-                  <Icon size={20} />
-                </div>
+                <Icon size={20} className="nav-icon" />
                 <span className="nav-label">{item.label}</span>
                 {item.badge && (
                   <span className="nav-badge">{item.badge}</span>
@@ -95,8 +93,8 @@ export default function AdminLayout({
 
         {/* Logout */}
         <button className="logout-btn">
-          <LogOut size={20} />
-          <span>Déconnexion</span>
+          <LogOut size={20} className="logout-icon" />
+          <span className="logout-label">Déconnexion</span>
         </button>
       </aside>
 
@@ -302,17 +300,18 @@ export default function AdminLayout({
         .nav-item {
           display: flex;
           align-items: center;
-          gap: 14px;
-          padding: 13px 16px;
+          gap: 12px;
+          padding: 12px 16px;
           border-radius: 12px;
           text-decoration: none;
           color: rgba(255, 255, 255, 0.75);
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 500;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           margin-bottom: 6px;
           position: relative;
           border-left: 3px solid transparent;
+          white-space: nowrap;
         }
 
         .nav-item::before {
@@ -351,26 +350,18 @@ export default function AdminLayout({
         }
 
         .nav-item.active .nav-icon {
-          background: linear-gradient(135deg, #D4AF37 0%, #F9E79F 100%);
-          color: #064E3B;
-          box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+          color: #D4AF37;
         }
 
         .nav-icon {
-          width: 38px;
-          height: 38px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          width: 20px;
+          height: 20px;
           flex-shrink: 0;
           transition: all 0.3s;
-          border-radius: 10px;
-          background: rgba(255, 255, 255, 0.05);
         }
 
         .nav-item:hover .nav-icon {
-          background: rgba(255, 255, 255, 0.1);
-          transform: scale(1.05);
+          transform: scale(1.1);
         }
 
         .nav-item.active .nav-icon {
@@ -380,6 +371,7 @@ export default function AdminLayout({
         .nav-label {
           flex: 1;
           font-weight: 500;
+          line-height: 1.2;
         }
 
         .nav-item.active .nav-label {
@@ -387,19 +379,21 @@ export default function AdminLayout({
         }
 
         .nav-badge {
-          min-width: 24px;
-          height: 24px;
+          min-width: 22px;
+          height: 22px;
           display: flex;
           align-items: center;
           justify-content: center;
           background: rgba(212, 175, 55, 0.2);
           color: #D4AF37;
-          border-radius: 8px;
+          border-radius: 6px;
           font-size: 11px;
           font-weight: 700;
-          padding: 0 8px;
+          padding: 0 6px;
           transition: all 0.3s;
           border: 1px solid rgba(212, 175, 55, 0.3);
+          flex-shrink: 0;
+          margin-left: auto;
         }
 
         .nav-item.active .nav-badge {
@@ -416,18 +410,30 @@ export default function AdminLayout({
 
         .logout-btn {
           margin: 16px;
-          padding: 13px 16px;
+          padding: 12px 16px;
           background: rgba(220, 38, 38, 0.1);
           border: 1px solid rgba(220, 38, 38, 0.2);
           border-radius: 12px;
           color: rgba(255, 255, 255, 0.75);
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 500;
           cursor: pointer;
           display: flex;
           align-items: center;
-          gap: 14px;
+          gap: 12px;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          white-space: nowrap;
+        }
+
+        .logout-icon {
+          width: 20px;
+          height: 20px;
+          flex-shrink: 0;
+        }
+
+        .logout-label {
+          flex: 1;
+          line-height: 1.2;
         }
 
         .logout-btn:hover {
@@ -435,6 +441,10 @@ export default function AdminLayout({
           border-color: rgba(220, 38, 38, 0.4);
           color: #FCA5A5;
           transform: translateX(4px);
+        }
+
+        .logout-btn:hover .logout-icon {
+          transform: scale(1.1);
         }
 
         .logout-btn:active {
