@@ -22,7 +22,8 @@ import {
   LogOut,
   BarChart3,
   Image as ImageIcon,
-  MessageSquare
+  MessageSquare,
+  Plus
 } from 'lucide-react'
 
 export default function AdminLayout({
@@ -68,6 +69,34 @@ export default function AdminLayout({
           </button>
         </div>
 
+        {/* Search Bar */}
+        <div className="search-section">
+          <div className="search-input">
+            <Search size={16} className="search-icon" />
+            <input type="text" placeholder="Rechercher..." />
+            <kbd className="search-kbd">⌘K</kbd>
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="quick-actions-section">
+          <div className="section-title">ACTIONS RAPIDES</div>
+          <div className="quick-actions-grid">
+            <button className="quick-action-btn">
+              <Plus size={16} />
+              <span>Lot</span>
+            </button>
+            <button className="quick-action-btn">
+              <Plus size={16} />
+              <span>Enchère</span>
+            </button>
+            <button className="quick-action-btn">
+              <Plus size={16} />
+              <span>User</span>
+            </button>
+          </div>
+        </div>
+
         {/* Navigation */}
         <nav className="sidebar-nav">
           {navItems.map((item, index) => {
@@ -90,6 +119,25 @@ export default function AdminLayout({
             )
           })}
         </nav>
+
+        {/* Recents Section */}
+        <div className="recents-section">
+          <div className="section-title">RÉCENTS</div>
+          <div className="recent-items">
+            <Link href="#" className="recent-item">
+              <Package size={14} />
+              <span>Lot #1234</span>
+            </Link>
+            <Link href="#" className="recent-item">
+              <Gavel size={14} />
+              <span>Enchère #5678</span>
+            </Link>
+            <Link href="#" className="recent-item">
+              <Users size={14} />
+              <span>Utilisateur nouveau</span>
+            </Link>
+          </div>
+        </div>
 
         {/* Logout */}
         <button className="logout-btn">
@@ -272,12 +320,161 @@ export default function AdminLayout({
           color: #D4AF37;
         }
 
-        .sidebar-nav {
+        /* Search Section */
+        .search-section {
+          padding: 16px;
+          border-bottom: 2px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .search-input {
+          position: relative;
+          display: flex;
+          align-items: center;
+          background: rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(212, 175, 55, 0.2);
+          border-radius: 10px;
+          padding: 10px 12px;
+          transition: all 0.3s;
+        }
+
+        .search-input:focus-within {
+          background: rgba(0, 0, 0, 0.3);
+          border-color: rgba(212, 175, 55, 0.4);
+          box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .search-icon {
+          color: rgba(212, 175, 55, 0.6);
+          flex-shrink: 0;
+          margin-right: 8px;
+        }
+
+        .search-input input {
           flex: 1;
-          padding: 24px 16px;
+          background: transparent;
+          border: none;
+          outline: none;
+          color: rgba(255, 255, 255, 0.9);
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .search-input input::placeholder {
+          color: rgba(255, 255, 255, 0.4);
+        }
+
+        .search-kbd {
+          background: rgba(212, 175, 55, 0.15);
+          border: 1px solid rgba(212, 175, 55, 0.3);
+          border-radius: 4px;
+          padding: 2px 6px;
+          font-size: 11px;
+          font-weight: 600;
+          color: #D4AF37;
+          font-family: monospace;
+          flex-shrink: 0;
+          margin-left: 8px;
+        }
+
+        /* Quick Actions Section */
+        .quick-actions-section {
+          padding: 16px;
+          border-bottom: 2px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .section-title {
+          font-size: 11px;
+          font-weight: 700;
+          color: rgba(212, 175, 55, 0.7);
+          letter-spacing: 1px;
+          margin-bottom: 12px;
+          text-transform: uppercase;
+        }
+
+        .quick-actions-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 8px;
+        }
+
+        .quick-action-btn {
+          background: rgba(212, 175, 55, 0.1);
+          border: 1px solid rgba(212, 175, 55, 0.25);
+          border-radius: 8px;
+          padding: 10px 8px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 6px;
+          cursor: pointer;
+          transition: all 0.3s;
+          color: rgba(255, 255, 255, 0.75);
+          font-size: 11px;
+          font-weight: 600;
+        }
+
+        .quick-action-btn:hover {
+          background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(249, 231, 159, 0.2) 100%);
+          border-color: rgba(212, 175, 55, 0.5);
+          color: #D4AF37;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+        }
+
+        .quick-action-btn:active {
+          transform: translateY(0);
+        }
+
+        /* Recents Section */
+        .recents-section {
+          padding: 16px;
+          border-top: 2px solid rgba(212, 175, 55, 0.1);
+          margin-top: auto;
+        }
+
+        .recent-items {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .recent-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 8px 12px;
+          border-radius: 8px;
+          text-decoration: none;
+          color: rgba(255, 255, 255, 0.65);
+          font-size: 13px;
+          font-weight: 500;
+          transition: all 0.3s;
+          border-left: 2px solid transparent;
+        }
+
+        .recent-item:hover {
+          background: rgba(212, 175, 55, 0.1);
+          color: #D4AF37;
+          border-left-color: #D4AF37;
+          transform: translateX(4px);
+        }
+
+        .recent-item svg {
+          flex-shrink: 0;
+          opacity: 0.7;
+        }
+
+        .recent-item:hover svg {
+          opacity: 1;
+        }
+
+        .sidebar-nav {
+          flex: 1 1 auto;
+          padding: 16px;
           overflow-y: auto;
           scrollbar-width: thin;
-          scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+          scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
+          min-height: 0;
         }
 
         .sidebar-nav::-webkit-scrollbar {
