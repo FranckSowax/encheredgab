@@ -114,22 +114,6 @@ export default function AdminLayout({
           })}
         </nav>
 
-        {/* Recents Section */}
-        <div className="recents-section">
-          <div className="section-title">RÉCENTS</div>
-          <div className="recent-items">
-            <Link href="#" className="recent-item">
-              <span>• Lot #1234</span>
-            </Link>
-            <Link href="#" className="recent-item">
-              <span>• Enchère #5678</span>
-            </Link>
-            <Link href="#" className="recent-item">
-              <span>• Utilisateur nouveau</span>
-            </Link>
-          </div>
-        </div>
-
         {/* Logout */}
         <button className="logout-btn">
           <span className="logout-label">Déconnexion</span>
@@ -378,9 +362,9 @@ export default function AdminLayout({
         }
 
         .quick-actions-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 8px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
         }
 
         .quick-action-btn {
@@ -408,39 +392,6 @@ export default function AdminLayout({
 
         .quick-action-btn:active {
           transform: translateY(0);
-        }
-
-        /* Recents Section */
-        .recents-section {
-          padding: 20px 16px;
-          border-top: 2px solid rgba(212, 175, 55, 0.1);
-          margin-top: auto;
-        }
-
-        .recent-items {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-          margin-top: 8px;
-        }
-
-        .recent-item {
-          display: block;
-          padding: 10px 12px;
-          border-radius: 8px;
-          text-decoration: none;
-          color: rgba(255, 255, 255, 0.65);
-          font-size: 13px;
-          font-weight: 500;
-          transition: all 0.3s;
-          border-left: 2px solid transparent;
-        }
-
-        .recent-item:hover {
-          background: rgba(212, 175, 55, 0.1);
-          color: #D4AF37;
-          border-left-color: #D4AF37;
-          transform: translateX(4px);
         }
 
         .sidebar-nav {
